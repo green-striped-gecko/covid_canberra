@@ -6,8 +6,6 @@ library(rvest)
 gapi <- readLines("gapi.txt")
 register_google(gapi)
 
-
-
 #grab from website
 
 
@@ -23,8 +21,12 @@ lu <- substr(strsplit(dummy,"updated:")[[1]][2],2,100)
 lu <- gsub(" ", "_",lu)
 lu <- gsub(":","",lu)
 
+
+
+
+
 #grab tables
-tnames <- c("Close Contacts", "Casual Contacts","Monitor for symptoms")
+tnames <- c("Close_Contacts", "Casual_Contacts","Monitor_for_symptoms")
 es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
 tbls <- html_nodes(es, "table")
 
@@ -66,6 +68,14 @@ tabs[[i]] <- tab
 m
 names(tabs)<- tnames
 
+lapply(tabs,function(x) summary(x$lat) )
+lapply(tabs,function(x) summary(x$lon) )
 
+
+
+#errors (manual)
+
+#oakley in casual 2x  [-35.24167	149.058]
+#aranda in monitoring [-35.2536	149.08]
 
 
