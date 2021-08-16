@@ -2,13 +2,13 @@ library(leaflet)
 library(ggmap)
 library(rvest)
 
-fixgeo <- function(search,tab,  lat, lon, tt=tabs) {
+fixgeo <- function(search,  lat, lon, tt=tab3) {
   
   ii <- NA
-  ii <- grep(search,tt[[tab]]$Place)
+  ii <- grep(search,tt$Place)
   for (c in 1:length(ii)){
-    tt[[tab]][ii[c],"lat"] <-lat
-    tt[[tab]][ii[c],"lon"] <- lon
+    tt[ii[c],"lat"] <-lat
+    tt[ii[c],"lon"] <- lon
   }
   return(tt)
 }
@@ -42,66 +42,77 @@ tbls_ls <- es %>%
   html_table(fill = TRUE)
 #there are three tables
 
+tbls_ls[[2]]$State<- NULL
+tbls_ls <- lapply(tbls_ls, data.frame)
+tbls_ls[[1]]$table="Close Contacts"
+tbls_ls[[2]]$table="Casual Contacts"
+tbls_ls[[3]]$table="Monitoring"
+
+
+colnames(tbls_ls[[3]])<-colnames(tbls_ls[[2]])<- colnames(tbls_ls[[1]])
+
+
+tab3 <- do.call(rbind, tbls_ls)
+
+#change empty to previous
+tab3$Status <- ifelse(tab3$Status=="","Previous",tab3$Status)
 #check if there was an update....
-
 ff <- list.files("./data/")
-
 wu <- grep(lu, ff)
-
 if(length(wu)>0) stop("No updated since. Current data is from:", lu,"\n") 
 
 
-if (length(wu)==0)
+
+
+if(length(wu)==0)
 {
-unlist(lapply(tbls_ls, nrow))
 
-
-
-
-tabs <- list()
 cols <- c("red", "yellow", "blue")
-for (i in 1:3)
-{
-tab <- data.frame(tbls_ls[[i]])  
 
-#change empty to previous
-tab$Status <- ifelse(tab$Status=="","Previous",tab$Status)
 #get coordinates
-address <- geocode(paste(tab$Place,", Canberra, Australia"))
+address <- geocode(paste(tab3$Place,", Canberra, Australia"))
 
-tab$lat <- address$lat
-tab$lon <- address$lon
-tabs[[i]] <- tab
-}
-names(tabs)<- tnames
+tab3$lat <- address$lat
+tab3$lon <- address$lon
+
 ##errors (manual)
 ##oakley in casual 2x  [-35.24167	149.058]
-tabs <- fixgeo("TLE Electrical & Data supplies, 22-36 Oatley Court",tab = 2, lat=-35.24167, lon = 149.058)
+tab3 <- fixgeo("TLE Electrical & Data supplies, 22-36 Oatley Court", lat=-35.24167, lon = 149.058)
 
 ##aranda in monitoring [-35.2536 ) 
-tabs <- fixgeo("Aranda Playing Fields", tab=3, lat=-35.25363, lon=149.08)
+tab3 <- fixgeo("Aranda Playing Fields", lat=-35.25363, lon=149.08)
 
 
-m <- leaflet() %>% addTiles()
-for (i in 1:3) {
+
+#latest files
+flast <- list.files("./data/", pattern="table_")
+t.name<- flast[which(order(file.mtime(file.path("data",flast)))==3)]
+ltab <- read.csv(file.path("data",t.name)) 
+if (identical(ltab[,1:6], tabs[[1]][,1:6])) cat("Casual table [table #1] has not changed \n")
+
+
+
+
+
 # Aggregate method
-labs <- paste(tabs[[i]]$Place, tabs[[i]]$Date,tabs[[i]]$Arrival.Time, tabs[[i]]$Departure.Time, sep="<br/>") 
+labs <- paste(tab3$Place, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+m <- leaflet() %>% addTiles()
 
-m <- m %>% addCircleMarkers(lat=tabs[[i]]$lat, lng=tabs[[i]]$lon,popup = labs, weight=0.5, color = cols[i], radius = 5 , fillOpacity = 0.8)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[as.numeric(factor(tab3$table))], radius = 5 , fillOpacity = 0.8)
 
-}
+
 
 #checks 
 m
 
 
-lapply(tabs,function(x) summary(x$lat) )
-lapply(tabs,function(x) summary(x$lon) )
+ range(tab3$lat) 
+ range(tab3$lon) 
 
 
 
-for (i in 1:3)
-{
-write.csv(tabs[[i]], paste0("./data/",tnames[i],"_",lu,".csv"),row.names = FALSE )
+
+
+write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
+
 }
-}  #wu >0 = new data is there....
