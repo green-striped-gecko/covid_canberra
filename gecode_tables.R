@@ -55,7 +55,8 @@ colnames(tbls_ls[[3]])<-colnames(tbls_ls[[2]])<- colnames(tbls_ls[[1]])
 tab3 <- do.call(rbind, tbls_ls)
 
 #change empty to previous
-tab3$Status <- ifelse(tab3$Status=="","Previous",tab3$Status)
+tab3$Status <- ifelse(tab3$Status=="New","New","")
+tab3$type <- paste(tab3$table, tab3$Status)
 #check if there was an update....
 ff <- list.files("./data/")
 wu <- grep(lu, ff)
@@ -82,13 +83,13 @@ tab3 <- fixgeo("TLE Electrical & Data supplies, 22-36 Oatley Court", lat=-35.241
 ##aranda in monitoring [-35.2536 ) 
 tab3 <- fixgeo("Aranda Playing Fields", lat=-35.25363, lon=149.08)
 
-
-
+#Lawrence & Hanson Mitchell [149.1398 -35.21061]
+tab3 <- fixgeo("Lawrence & Hanson Mitchell", lat = -35.21061, lon=149.1398)
 #latest files
 flast <- list.files("./data/", pattern="table_")
-t.name<- flast[which(order(file.mtime(file.path("data",flast)))==3)]
+t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
 ltab <- read.csv(file.path("data",t.name)) 
-if (identical(ltab[,1:6], tabs[[1]][,1:6])) cat("Casual table [table #1] has not changed \n")
+if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not changed \n")
 
 
 
@@ -111,8 +112,10 @@ m
 
 
 
-
+write.csv( tab3,"./data/last.csv",row.names = FALSE, quote = FALSE)
 
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
+
+
 
 }
