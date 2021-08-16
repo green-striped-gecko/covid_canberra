@@ -1,0 +1,55 @@
+---
+title: "Covid19 contact location information"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=TRUE}
+library(tidyverse)
+library(ggmap)
+library(leaflet)
+library(plotly)
+
+library(flexdashboard)
+flast <- list.files("./data/", pattern="table_")
+t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
+ltab <- read.csv(file.path("data",t.name)) 
+
+#latest dataset
+tab3 <- ltab
+# Aggregate method
+labs <- paste(tab3$Place, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+
+m <- leaflet() %>% addTiles()
+# , color = cols[as.numeric(factor(tab3$table))
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, radius = 5 , fillOpacity = 0.8)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+library(DT)
+DT::datatable(tab3)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+#checks 
+m
+```
+
+### Chart C
+
+```{r}
+#filter on location
+```
+
