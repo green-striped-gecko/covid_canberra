@@ -1,5 +1,5 @@
 ---
-title: "Covid19 exposure locations in the ACT [Updated 17 August 2021, 10:27 pm]"
+title: "Covid19 exposure locations in the ACT"
 resource_files:
 - data/last.csv
 #runtime: shiny
