@@ -82,6 +82,12 @@ tab3 <- fixgeo("TLE Electrical & Data supplies, 22-36 Oatley Court", lat=-35.241
 ##aranda in monitoring [-35.2536 ) 
 tab3 <- fixgeo("Aranda Playing Fields", lat=-35.25363, lon=149.08)
 
+tab3<- fixgeo("GGs Flowers & Hampers", lat=-35.37559, lon=149.1018)
+
+tab3<- fixgeo("Coles Supermarket, Manuka, Franklin Street &", lat=-35.32102, lon=149.1342)
+
+tab3<- fixgeo("McDonalds, Cnr Charnwood Place", lat=-35.20595, lon=149.0343)
+
 #Lawrence & Hanson Mitchell [149.1398 -35.21061]
 tab3 <- fixgeo("Lawrence & Hanson Mitchell", lat = -35.21061, lon=149.1398)
 #latest files
