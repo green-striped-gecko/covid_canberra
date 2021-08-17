@@ -19,13 +19,13 @@ library(DT)
 #latest dataset
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
-cols <- rep(c("yellow", "red", "blue"), 2)
+cols <-c("yellow", "red", "blue")
 
 m <- leaflet() %>% addTiles()
 # 
-ttn <- subset(tab3, Status=="New")
+ttn <-tab3
 labs <- paste(ttn$table,ttn$Place, ttn$Date,paste0(ttn$Arrival.Time," - ", ttn$Departure.Time), sep="<br/>") 
-cc <- cols[as.numeric(factor(ttn$type))]
+cc <- cols[as.numeric(factor(ttn$table))]
 
 m <- m %>% addCircles(lat=ttn$lat, lng=ttn$lon,popup = labs, radius=8,weight=8, fillOpacity = 0.8, fillColor = cc, color = cc, opacity = 0.8)
 
