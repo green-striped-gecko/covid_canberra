@@ -26,6 +26,7 @@ ll <- es %>%
   html_text()
 index <- grep("Page last updated:",ll)
 dummy <- ll[index]
+lup <- dummy
 lu <- substr(strsplit(dummy,"updated:")[[1]][2],2,100)
 lu <- gsub(" ", "_",lu)
 lu <- gsub(":","",lu)
@@ -120,8 +121,7 @@ m
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
-
-
+rmarkdown::render("Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup=lup), output_file = "index.html")
 }
 
 

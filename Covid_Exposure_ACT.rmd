@@ -2,12 +2,13 @@
 title: "Covid19 exposure locations in the ACT [Updated 17 August 2021, 10:27 pm]"
 resource_files:
 - data/last.csv
-runtime: shiny
+#runtime: shiny
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
-    
+params:
+    lup: "unknown"
 ---
 
 ```{r setup, include=TRUE}
@@ -29,11 +30,11 @@ labs <- paste(ttn$table,ttn$Place, ttn$Date,paste0(ttn$Arrival.Time," - ", ttn$D
 cc <- cols[as.numeric(factor(ttn$table))]
 
 m <- m %>% addCircles(lat=ttn$lat, lng=ttn$lon,popup = labs, radius=8,weight=8, fillOpacity = 0.8, fillColor = cc, color = cc, opacity = 0.8)
+```
 
+```{r title, results='asis'} 
 
-
-
-
+cat(paste0("# ", params$lup))
 
 ```
 
