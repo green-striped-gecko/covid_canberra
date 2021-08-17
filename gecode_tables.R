@@ -60,7 +60,6 @@ tab3$type <- paste(tab3$table, tab3$Status)
 #check if there was an update....
 ff <- list.files("./data/")
 wu <- grep(lu, ff)
-if(length(wu)>0) stop("No updated since. Current data is from:", lu,"\n") 
 
 
 
@@ -118,3 +117,6 @@ write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
 
 }
+
+
+if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 

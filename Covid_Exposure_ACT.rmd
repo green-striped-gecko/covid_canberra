@@ -1,5 +1,5 @@
 ---
-title: "Covid19 exposure locations in the ACT"
+title: "Covid19 exposure locations in the ACT [Updated 17 August 2021, 4:18pm]"
 resource_files:
 - data/last.csv
 runtime: shiny
@@ -7,6 +7,7 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    
 ---
 
 ```{r setup, include=TRUE}
