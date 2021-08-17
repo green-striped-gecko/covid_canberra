@@ -112,8 +112,7 @@ m
 
 
 
-write.csv( tab3,"./data/last.csv",row.names = FALSE, quote = FALSE)
-
+write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
 
