@@ -25,11 +25,11 @@ cols <-c("yellow", "red", "blue")
 
 m <- leaflet() %>% addTiles()
 # 
-ttn <-tab3
-labs <- paste(ttn$table,ttn$Place, ttn$Date,paste0(ttn$Arrival.Time," - ", ttn$Departure.Time), sep="<br/>") 
-cc <- cols[as.numeric(factor(ttn$table))]
 
-m <- m %>% addCircles(lat=ttn$lat, lng=ttn$lon,popup = labs, radius=8,weight=8, fillOpacity = 0.8, fillColor = cc, color = cc, opacity = 0.8)
+labs <- paste(tab3$table,tab3$Place, tab3$Date,paste0(tab3$Arrival.Time," - ", tab3$Departure.Time), sep="<br/>") 
+cc <- cols[as.numeric(factor(tab3$table))]
+
+m <- m %>% addCircles(lat=tab3$lat, lng=tab3$lon,popup = labs, radius=8,weight=8, fillOpacity = 0.8, fillColor = cc, color = cc, opacity = 0.8) %>% addLegend(position="bottomright", labels=levels(factor(tab3$table)), colors = cols)
 ```
 
 ```{r title, results='asis'} 
