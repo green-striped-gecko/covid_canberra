@@ -29,3 +29,5 @@ vignettes/*.pdf
 gapi.txt
 rsconnect
 Covid_Exposure_ACT.html
+Covid_Exposure_ACT_test.Rmd
+Covid_Exposure_ACT_test.html
