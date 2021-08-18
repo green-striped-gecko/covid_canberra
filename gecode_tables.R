@@ -81,6 +81,7 @@ address <- geocode(paste0( tab3$Street,", ", tab3$Exposure.Location,", ",tab3$Su
 tab3$lat <- address$lat
 tab3$lon <- address$lon
 
+######################################################3
 ##errors (manual)
 
 tab3<- fixgeo("Coles Supermarket Manuka", lat=-35.32102, lon=149.1342)
@@ -97,7 +98,9 @@ tab3 <- fixgeo("Hawker Drive In Bottle Shop", lat =   -35.2426147, lon =149.0449
 
 tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.0653)
 
+tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.0800225)
 
+######################################################
 
 #latest files
 flast <- list.files("./data/", pattern="table_")
@@ -111,25 +114,28 @@ labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab
 
 cc <- as.numeric(factor(tab3$Contact))
 
-
+###############################################
 ##plot the map
 m <- leaflet() %>% addTiles()
 
 m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
 
-
 m
-
+###############################################
 
  range(tab3$lat) 
  range(tab3$lon) 
 
+ 
 
+####################################################
 #once fixed save the table again and push to github
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
 rmarkdown::render("Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup=lup), output_file = "index.html")
+####################################################
+
 }
 
 
