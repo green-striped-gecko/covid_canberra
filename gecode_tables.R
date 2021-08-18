@@ -109,6 +109,10 @@ ltab <- read.csv(file.path("data",t.name))
 if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not changed \n")
 
 
+tab3$lat <- jitter(tab3$lat,1)
+tab3$lon <- jitter(tab3$lon,1)
+
+
 
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
 
@@ -116,11 +120,26 @@ cc <- as.numeric(factor(tab3$Contact))
 
 ###############################################
 ##plot the map
+
 m <- leaflet() %>% addTiles()
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8,
+                            clusterOptions =  
+                              markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
+    var childCount = cluster.getChildCount();  
+    if (childCount < 100) {  
+      c = 'rgba(64, 64, 64, 0.3);'
+    } else if (childCount < 1000) {  
+      c = 'rgba(64, 64, 64, 0.3);'  
+    } else { 
+      c = 'rgba(64, 64, 64, 0.3);'  
+    }    
+    return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
 
-m
+  }")                            
+                              )
+)
+m 
 ###############################################
 
  range(tab3$lat) 
