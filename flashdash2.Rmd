@@ -1,0 +1,133 @@
+---
+title: "Covid19 contact location information"
+resource_files:
+- data/last.rds
+- data/last.csv
+- data/table_16_Aug_2021_233pm.csv
+- data/table_17_Aug_2021_1205am.csv
+- data/table_17_Aug_2021_1214am.csv
+# runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+Column {data-width=600}
+-------------------------------------
+    
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggmap)
+library(leaflet)
+library(plotly)
+library(flexdashboard)
+
+#run to update (not current code)
+# source(here::here("gecode_tables.R"), echo = TRUE)
+# # results = "asis")
+# flast <- list.files("./data/", pattern="table_")
+# t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
+# ltab <- read.csv(file.path("data",t.name)) 
+
+tab3 <- read_rds("data/last.rds")
+# str(tab3)
+
+# Aggregate method
+labs <- paste(tab3$Place, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+# names(tab3)
+
+tab4 <- tab3 %>%
+  mutate(colsN = factor(table))
+
+levels(tab4$colsN) <- c("orange", "red", "purple")
+
+m <- leaflet() %>% addTiles()
+
+m <- m %>% addCircleMarkers(lat=tab4$lat,         
+                            lng=tab4$lon,
+                            color = tab4$colsN,
+                            stroke = TRUE,
+                            # fill = "black", 
+                            popup = labs, 
+                            weight=0.8, 
+                            radius = 5 , 
+                            fillOpacity = 0.8
+                            )
+
+
+
+# m
+```
+
+### Contact locations
+
+```{r}
+#checks 
+m
+```
+
+Column {data-width=400}
+-------------------------------------
+
+### Detailed data
+
+Extracted from the ACT goverment website at `r Sys.Date()`. This application is intended to make finding and understanding contact locations easier in the ACT. `r #Sys.Date()`
+
+```{r}
+library(DT)
+# names(tab3)
+tab6 <- tab3 %>%
+          select(Date,Suburb, Place, Arrival.Time, Departure.Time, table) %>%
+    rename(`Contact date` = Date,
+           `Arrival time` = Arrival.Time,
+           `Departure time` = Departure.Time,
+           `Action` = table)
+# devtools::install_github("rstudio/DT")
+library(DT)
+library(magrittr)
+
+DT::datatable(tab6,
+              # filter = "bottom",
+              class = 'cell-border stripe',  
+              rownames = FALSE, 
+              options = list(pageLength = 10, initComplete = JS(
+    "function(settings, json) {","$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff','font-size': '75%'});","}"))) %>% 
+  formatStyle('Action',target = 'row',backgroundColor = styleEqual(c("Close Contacts", "Casual Contacts","Monitoring"), c('#8B48A4', '#F6605C', "#EF974D")))# %>% 
+                #formatStyle(columns = colnames(tab6), fontSize = '50%')
+
+# options=list(
+#   initComplete = JS(
+#         "function(settings, json) {",
+#         "$(this.api().table().header()).css({'font-size': '50%'});",
+#         "}")))
+#   )
+```
+
+### New CLOSE contacts 
+
+<!-- Checked at 18082021 --> 
+
+```{r}
+articles <- table(tab3$type)[[2]]#computeArticles()
+valueBox(articles, icon = "fa-hand-paper-o", color = "purple")
+```
+
+### New CASUAL contacts
+
+<!-- Checked at 18082021 --> 
+
+```{r}
+articles <- table(tab3$type)[[4]]#computeArticles()
+valueBox(articles, icon = "fa-hand-lizard-o", color = "red")
+```
+
+### New Monitoring contacts
+
+<!-- Checked at 18082021 --> 
+
+```{r}
+articles <- table(tab3$type)[[6]]#computeArticles()
+valueBox(articles, icon = "fa-hand-rock-o", color = "orange")
+```
+
