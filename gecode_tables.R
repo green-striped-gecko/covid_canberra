@@ -91,6 +91,14 @@ tab3<- fixgeo("Basketball ACT", lat=-35.24185, lon=149.057)
 tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
 
 
+tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
+
+tab3 <- fixgeo("Hawker Drive In Bottle Shop", lat =   -35.2426147, lon =149.0449504)
+
+tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.0653)
+
+
+
 #latest files
 flast <- list.files("./data/", pattern="table_")
 t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
@@ -102,6 +110,8 @@ if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not chan
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
 
 cc <- as.numeric(factor(tab3$Contact))
+
+
 ##plot the map
 m <- leaflet() %>% addTiles()
 
