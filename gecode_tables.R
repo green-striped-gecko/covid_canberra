@@ -79,14 +79,10 @@ tab3$lon <- address$lon
 ##errors (manual)
 ##oakley in casual 2x  [-35.24167	149.058]
 tab3 <- fixgeo("TLE Electrical & Data supplies, 22-36 Oatley Court", lat=-35.24167, lon = 149.058)
-
 ##aranda in monitoring [-35.2536 ) 
 tab3 <- fixgeo("Aranda Playing Fields", lat=-35.25363, lon=149.08)
-
 tab3<- fixgeo("GGs Flowers & Hampers", lat=-35.37559, lon=149.1018)
-
 tab3<- fixgeo("Coles Supermarket, Manuka, Franklin Street &", lat=-35.32102, lon=149.1342)
-
 tab3<- fixgeo("McDonalds, Cnr Charnwood Place", lat=-35.20595, lon=149.0343)
 
 #Lawrence & Hanson Mitchell [149.1398 -35.21061]
@@ -103,13 +99,14 @@ if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not chan
 
 # Aggregate method
 labs <- paste(tab3$Place, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+
+
+##plot the map
 m <- leaflet() %>% addTiles()
 
 m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[as.numeric(factor(tab3$table))], radius = 5 , fillOpacity = 0.8)
 
 
-
-#checks 
 m
 
 
@@ -117,7 +114,7 @@ m
  range(tab3$lon) 
 
 
-
+#once fixed
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
