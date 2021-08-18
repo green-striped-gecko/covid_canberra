@@ -60,13 +60,13 @@ Column {data-width=350}
 ### Table
 
 ```{r}
-dtt <-DT::datatable(tab3[,1:8],
-  rownames = FALSE, options = list(pageLength = 10, ausoHideNavigation=TRUE, 
+dtt <-DT::datatable(tab3[,c(1,8,2:7)],
+  rownames = FALSE, options = list(pageLength = 50, ausoHideNavigation=TRUE, 
   initComplete = JS(
         "function(settings, json) {",
         "$(this.api().table().header()).css({'font-size': '50%'});",
 
-        "}")))  %>% DT::formatStyle(columns = 1:7, fontSize='70%') 
+        "}")))  %>% DT::formatStyle(columns = 1:8, fontSize='70%') 
 
 dtt
 
