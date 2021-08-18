@@ -24,6 +24,7 @@ if (last!=current)
   SendOutlookMail(to = c("luis.mijangosaraujo@canberra.edu.au"), 
                   subject = "The has been a covid update.", 
                   body = paste0("New update is:\n", current))
+  writeLines(current, "c:/Bernd/R/covid_canberra/lastupdated.csv")
 
   }
 

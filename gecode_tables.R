@@ -1,11 +1,13 @@
 library(leaflet)
 library(ggmap)
 library(rvest)
+library(RSelenium)
+library(tidyverse)
 
 fixgeo <- function(search,  lat, lon, tt=tab3) {
   
   ii <- NA
-  ii <- grep(search,tt$Place)
+  ii <- grep(search,tt$Exposure.Location)
   for (c in 1:length(ii)){
     tt[ii[c],"lat"] <-lat
     tt[ii[c],"lon"] <- lon
@@ -31,33 +33,36 @@ lu <- substr(strsplit(dummy,"updated:")[[1]][2],2,100)
 lu <- gsub(" ", "_",lu)
 lu <- gsub(":","",lu)
 
+##### scrape covid exposure table from website
 
-#grab tables
-tnames <- c("Close_Contacts", "Casual_Contacts","Monitor_for_symptoms")
-es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
-tbls <- html_nodes(es, "table")
+rD <- rsDriver(browser="firefox", port=4545L, verbose=TRUE)
+remDr <- rD[["client"]]
+remDr$navigate("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
 
-tbls_ls <- es %>%
+Sys.sleep(5) # give the page time to fully load
+html <- remDr$getPageSource()[[1]]
+
+remDr$close()
+rD$server$stop()
+rm(rD)
+gc()
+#necessary to stop the server...
+system("taskkill /im java.exe /f", intern=FALSE, ignore.stdout=FALSE)
+signals <- read_html(html)
+
+
+tbls <- signals %>%
   html_nodes("table") %>%
-  .[1:3] %>%
   html_table(fill = TRUE)
-#there are three tables
 
-tbls_ls[[2]]$State<- NULL
-tbls_ls <- lapply(tbls_ls, data.frame)
-tbls_ls[[1]]$table="Close Contacts"
-tbls_ls[[2]]$table="Casual Contacts"
-tbls_ls[[3]]$table="Monitoring"
+tab3 <- data.frame(tbls)
 
 
-colnames(tbls_ls[[3]])<-colnames(tbls_ls[[2]])<- colnames(tbls_ls[[1]])
 
-
-tab3 <- do.call(rbind, tbls_ls)
 
 #change empty to previous
 tab3$Status <- ifelse(tab3$Status=="New","New","")
-tab3$type <- paste(tab3$table, tab3$Status)
+#tab3$type <- paste(tab3$Contact, tab3$Status)
 #check if there was an update....
 ff <- list.files("./data/")
 wu <- grep(lu, ff)
@@ -71,22 +76,21 @@ if(length(wu)==0)
 cols <- c("red", "yellow", "blue")
 
 #get coordinates
-address <- geocode(paste(tab3$Place,", Canberra, Australia"))
+address <- geocode(paste0( tab3$Street,", ", tab3$Exposure.Location,", ",tab3$Suburb ,", Canberra, Australia"))
 
 tab3$lat <- address$lat
 tab3$lon <- address$lon
 
 ##errors (manual)
-##oakley in casual 2x  [-35.24167	149.058]
-tab3 <- fixgeo("TLE Electrical & Data supplies, 22-36 Oatley Court", lat=-35.24167, lon = 149.058)
-##aranda in monitoring [-35.2536 ) 
-tab3 <- fixgeo("Aranda Playing Fields", lat=-35.25363, lon=149.08)
-tab3<- fixgeo("GGs Flowers & Hampers", lat=-35.37559, lon=149.1018)
-tab3<- fixgeo("Coles Supermarket, Manuka, Franklin Street &", lat=-35.32102, lon=149.1342)
-tab3<- fixgeo("McDonalds, Cnr Charnwood Place", lat=-35.20595, lon=149.0343)
 
-#Lawrence & Hanson Mitchell [149.1398 -35.21061]
-tab3 <- fixgeo("Lawrence & Hanson Mitchell", lat = -35.21061, lon=149.1398)
+tab3<- fixgeo("Coles Supermarket Manuka", lat=-35.32102, lon=149.1342)
+tab3<- fixgeo("Coles Supermarket  Manuka", lat=-35.32102, lon=149.1342)
+
+tab3<- fixgeo("Basketball ACT", lat=-35.24185, lon=149.057)
+
+tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
+
+
 #latest files
 flast <- list.files("./data/", pattern="table_")
 t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
@@ -95,16 +99,13 @@ if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not chan
 
 
 
+labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
 
-
-# Aggregate method
-labs <- paste(tab3$Place, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
-
-
+cc <- as.numeric(factor(tab3$Contact))
 ##plot the map
 m <- leaflet() %>% addTiles()
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[as.numeric(factor(tab3$table))], radius = 5 , fillOpacity = 0.8)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
 
 
 m
