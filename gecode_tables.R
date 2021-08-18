@@ -114,7 +114,7 @@ m
  range(tab3$lon) 
 
 
-#once fixed
+#once fixed save the table again and push to github
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
