@@ -38,7 +38,7 @@ cat(paste0("# ", params$lup))
 
 ```
 
-<sup>Disclaimer: This map shows the covid exposure sites and is an unofficial website based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations).<br>Contact: Bernd Gruber [Contact: bernd.gruber@canberra.edu.au]. Supported by Volunteers from the University of Canberra</sup>
+<sup>Disclaimer: This map shows the covid exposure locations in the ACT and is an **unofficial website** based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt, refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations).<br> Supported by Volunteers from the University of Canberra. Contact: Bernd Gruber [Contact: bernd.gruber@canberra.edu.au]</sup>
 
 Column {data-width=450}
 -----------------------------------------------------------------------
