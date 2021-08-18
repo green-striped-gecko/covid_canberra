@@ -85,11 +85,13 @@ tab3$lon <- address$lon
 
 tab3<- fixgeo("Coles Supermarket Manuka", lat=-35.32102, lon=149.1342)
 tab3<- fixgeo("Coles Supermarket  Manuka", lat=-35.32102, lon=149.1342)
-
 tab3<- fixgeo("Basketball ACT", lat=-35.24185, lon=149.057)
-
 tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
-
+#New fixgeo from latest 
+#might not be needed
+tab3 <- fixgeo("McDonalds, Cnr Charnwood Place & Lhotsky Place", lat = -35.20592038109227, lon = 149.03420942473596)
+tab3 <- fixgeo("Coles Supermarket, Manuka, Franklin Street &, Flinders Way", lat = -35.32084960138056, lon = 149.13436625911763)
+tab3 <- fixgeo("GGs Flowers & Hampers, Unit 3D Farrer Shops", lat = -35.37518348280349, lon = 149.10202382787637)
 
 #latest files
 flast <- list.files("./data/", pattern="table_")
