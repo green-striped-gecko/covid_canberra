@@ -33,6 +33,15 @@ lu <- substr(strsplit(dummy,"updated:")[[1]][2],2,100)
 lu <- gsub(" ", "_",lu)
 lu <- gsub(":","",lu)
 lu
+#check if there was an update....
+ff <- list.files("./data/")
+wu <- grep(lu, ff)
+
+
+
+
+if(length(wu)==0)
+{
 
 ##### scrape covid exposure table from website
 
@@ -64,15 +73,10 @@ tab3 <- data.frame(tbls)
 #change empty to previous
 tab3$Status <- ifelse(tab3$Status=="New","New","")
 #tab3$type <- paste(tab3$Contact, tab3$Status)
-#check if there was an update....
-ff <- list.files("./data/")
-wu <- grep(lu, ff)
 
 
 
 
-if(length(wu)==0)
-{
 
 cols <- c("red", "yellow", "blue")
 
@@ -178,6 +182,7 @@ m
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
+Sys.sleep(5)
 rmarkdown::render("Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup=lup), output_file = "index.html")
 ####################################################
 
