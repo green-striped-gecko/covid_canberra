@@ -36,7 +36,7 @@ lu
 
 ##### scrape covid exposure table from website
 
-rD <- rsDriver(browser="firefox", port=4545L, verbose=TRUE)
+rD <- rsDriver(browser="firefox", port=4545L, verbose=FALSE)
 remDr <- rD[["client"]]
 remDr$navigate("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
 
@@ -101,6 +101,8 @@ tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.065
 
 tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.0800225)
 
+tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 ######################################################
 
 #latest files
@@ -110,8 +112,8 @@ ltab <- read.csv(file.path("data",t.name))
 if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not changed \n")
 
 
-tab3$lat <- jitter(tab3$lat,2)
-tab3$lon <- jitter(tab3$lon,2)
+#tab3$lat <- jitter(tab3$lat,2)
+#tab3$lon <- jitter(tab3$lon,2)
 
 
 

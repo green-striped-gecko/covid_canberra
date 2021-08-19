@@ -30,8 +30,6 @@ cc <- as.numeric(factor(tab3$Contact))
 ###############################################
 ##plot the map
 
-tab3$lat <- jitter(tab3$lat,2)
-tab3$lon <- jitter(tab3$lon,2)
 
 
 m <- leaflet() %>% addTiles()
