@@ -111,13 +111,19 @@ t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
 ltab <- read.csv(file.path("data",t.name)) 
 if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not changed \n")
 
+lalo <- paste(tab3$lat, tab3$lon)
+tt <- table(lalo)
+doubles <- names(tt)[tt>1]
+index <- which(lalo %in% doubles)
 
-#tab3$lat <- jitter(tab3$lat,2)
-#tab3$lon <- jitter(tab3$lon,2)
+tab3$doubles <- ""
+tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Search table!</strong/>"
 
 
 
-labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
+
+
 
 cc <- as.numeric(factor(tab3$Contact))
 
