@@ -117,7 +117,7 @@ doubles <- names(tt)[tt>1]
 index <- which(lalo %in% doubles)
 
 tab3$doubles <- ""
-tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Search table!</strong/>"
+tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>"
 
 
 
