@@ -36,6 +36,23 @@ index <- which(lalo %in% doubles)
 tab3$doubles <- ""
 tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Search table!</strong/>"
 
+index <- which(tab3$doubles!="")
+tab3$moved <-FALSE
+
+for ( i in 1:length(index))
+{
+  
+  dbs <- which((lalo %in% lalo[index[i]]))
+  if (tab3$moved[dbs[1]]==FALSE) {
+    
+    mm <- seq(0, (length(dbs)-1)*0.00005,0.00005 )
+    mm <- mm-mean(mm)
+    tab3$lon[dbs] <- tab3$lon[dbs] -mm
+    
+    tab3$moved[dbs]<- TRUE
+  }
+}
+
 
 
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 

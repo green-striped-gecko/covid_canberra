@@ -121,6 +121,24 @@ tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Search ta
 
 
 
+index <- which(tab3$doubles!="")
+tab3$moved <-FALSE
+
+for ( i in 1:length(index))
+{
+  
+  dbs <- which((lalo %in% lalo[index[i]]))
+  if (tab3$moved[dbs[1]]==FALSE) {
+    
+    mm <- seq(0, (length(dbs)-1)*0.00005,0.00005 )
+    mm <- mm-mean(mm)
+    tab3$lon[dbs] <- tab3$lon[dbs] -mm
+    
+    tab3$moved[dbs]<- TRUE
+  }
+}
+
+
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
 
 
@@ -133,19 +151,19 @@ cc <- as.numeric(factor(tab3$Contact))
 m <- leaflet() %>% addTiles()
 
 m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8
-  #                                                                                                                                                       ,clusterOptions =  
-  #                             markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
-  #   var childCount = cluster.getChildCount();  
-  #   if (childCount < 100) {  
-  #     c = 'rgba(64, 64, 64, 0.3);'
-  #   } else if (childCount < 1000) {  
-  #     c = 'rgba(64, 64, 64, 0.3);'  
-  #   } else { 
-  #     c = 'rgba(64, 64, 64, 0.3);'  
-  #   }    
-  #   return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
-  # 
-  # }"))
+   #                                                                                                                                                       ,clusterOptions =  
+   #                             markerClusterOptions(spiderfyOnMaxZoom = FALSE, zoomToBoundsOnClick = FALSE,showCoverageOnHover = FALSE, iconCreateFunction=JS("function (cluster) {    
+   # var childCount = cluster.getChildCount();  
+   #   if (childCount < 100) {  
+   #     c = 'rgba(64, 64, 64, 0.3);'
+   #   } else if (childCount < 1000) {  
+   #     c = 'rgba(64, 64, 64, 0.3);'  
+   #   } else { 
+   #     c = 'rgba(64, 64, 64, 0.3);'  
+   #   }    
+   #   return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(5, 5) });
+   # 
+   # }"))
 )
 m 
 ###############################################
