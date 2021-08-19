@@ -20,10 +20,10 @@ gapi <- readLines("gapi.txt")
 register_google(gapi)
 
 #grab from website
-es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
+es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations", )
 
 #check update
-ll <- signals %>%
+ll <- es %>%
   html_nodes("strong") %>%
   html_text()
 index <- grep("Page last updated:",ll)
