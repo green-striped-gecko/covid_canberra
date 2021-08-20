@@ -109,11 +109,6 @@ tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 ######################################################
 
-#latest files
-flast <- list.files("./data/", pattern="table_")
-t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
-ltab <- read.csv(file.path("data",t.name)) 
-if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not changed \n")
 
 lalo <- paste(tab3$lat, tab3$lon)
 tt <- table(lalo)
@@ -145,6 +140,12 @@ for ( i in 1:length(index))
 
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
 
+#check added locations (last update)and make them obvious
+
+
+
+
+
 
 
 cc <- as.numeric(factor(tab3$Contact))
@@ -154,31 +155,19 @@ cc <- as.numeric(factor(tab3$Contact))
 
 m <- leaflet() %>% addTiles()
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8
-   #                                                                                                                                                       ,clusterOptions =  
-   #                             markerClusterOptions(spiderfyOnMaxZoom = FALSE, zoomToBoundsOnClick = FALSE,showCoverageOnHover = FALSE, iconCreateFunction=JS("function (cluster) {    
-   # var childCount = cluster.getChildCount();  
-   #   if (childCount < 100) {  
-   #     c = 'rgba(64, 64, 64, 0.3);'
-   #   } else if (childCount < 1000) {  
-   #     c = 'rgba(64, 64, 64, 0.3);'  
-   #   } else { 
-   #     c = 'rgba(64, 64, 64, 0.3);'  
-   #   }    
-   #   return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(5, 5) });
-   # 
-   # }"))
-)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
+m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols)
 m 
 ###############################################
 
  range(tab3$lat) 
  range(tab3$lon) 
+####################################################
 
  
-
-####################################################
-#once fixed save the table again and push to github
+ 
+ 
+ #once fixed save the table again and push to github
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
@@ -189,4 +178,39 @@ rmarkdown::render("Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup
 }
 
 
-if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
+
+
+
+if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") else {
+  
+  cat("Data have been updated.\nNew data is from:", lu,"\n")
+  
+  #latest files
+  flast <- list.files("./data/", pattern="table_")
+  t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[2]]
+  ldata <- read.csv(file.path("data","last.csv"))
+  l2data <- read.csv(file.path("data",t.name)) 
+  
+
+  comp <- comparedf(ldata, l2data)
+  scomp <- summary(comp)
+  scomp$comparison.summary.table
+  obsy <- scomp$obs.table[scomp$obs.table$version=="y",]
+  obsx <- scomp$obs.table[scomp$obs.table$version=="x",]
+  if (nrow(obsx)>0) {
+    cat("New added location:\n")
+    newobs <- obsx$observation
+    ldata[newobs,c(1:10)]
+    
+    m %>% addCircleMarkers(lat=tab3$lat[newobs], lng=tab3$lon[newobs],popup = labs[newobs], weight=0.5, color = "purple", radius = 7 , fillOpacity = 0.5)
+    }
+  if (nrow(obsy)>0) {
+    cat("Removed locations:\n")
+    l2data[obsy$observation,c(1:10)]
+  }
+  
+  
+  }
+  
+ 
+
