@@ -194,7 +194,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
 
   comp <- comparedf(ldata, l2data)
   scomp <- summary(comp)
-  scomp$comparison.summary.table
+ 
   obsy <- scomp$obs.table[scomp$obs.table$version=="y",]
   obsx <- scomp$obs.table[scomp$obs.table$version=="x",]
   if (nrow(obsx)>0) {
@@ -209,7 +209,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
     l2data[obsy$observation,c(1:10)]
   }
   
-  
+  scomp$comparison.summary.table  
   }
   
  
