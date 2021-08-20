@@ -5,7 +5,7 @@ cat("Data have been updated.\nNew data is from:", lup,"\n")
 
 #latest files
 flast <- list.files("./data/", pattern="table_")
-t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[9]]
+t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[2]]
 ldata <- read.csv(file.path("c:/bernd/r/covid_canberra/data","last.csv"))
 l2data <- read.csv(file.path("c:/bernd/r/covid_canberra/data",t.name)) 
 

@@ -4,27 +4,27 @@
 |Number of non-by variables in common                        |    10|
 |Number of variables compared                                |    10|
 |Number of variables in x but not y                          |     2|
-|Number of variables in y but not x                          |     0|
+|Number of variables in y but not x                          |     1|
 |Number of variables compared with some values unequal       |    10|
 |Number of variables compared with all values equal          |     0|
-|Number of observations in common                            |   257|
-|Number of observations in x but not y                       |     9|
+|Number of observations in common                            |   188|
+|Number of observations in x but not y                       |    78|
 |Number of observations in y but not x                       |     0|
-|Number of observations with some compared variables unequal |   222|
-|Number of observations with all compared variables equal    |    35|
-|Number of values unequal                                    |  1265|
+|Number of observations with some compared variables unequal |   161|
+|Number of observations with all compared variables equal    |    27|
+|Number of values unequal                                    |   961|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  48|   0|
-|Exposure.Location |Exposure.Location | 160|   0|
-|Street            |Street            | 150|   0|
-|Suburb            |Suburb            | 127|   0|
-|Date              |Date              |  77|   0|
-|Arrival.Time      |Arrival.Time      | 162|   0|
-|Departure.Time    |Departure.Time    | 153|   0|
-|Contact           |Contact           |  24|   0|
-|lat               |lat               | 149|   0|
-|lon               |lon               | 215|   0|
+|Status            |Status            |  31|   0|
+|Exposure.Location |Exposure.Location | 108|   0|
+|Street            |Street            | 107|   0|
+|Suburb            |Suburb            | 104|   0|
+|Date              |Date              |  95|   0|
+|Arrival.Time      |Arrival.Time      | 112|   0|
+|Departure.Time    |Departure.Time    | 108|   0|
+|Contact           |Contact           |  38|   0|
+|lat               |lat               | 107|   0|
+|lon               |lon               | 151|   0|
 range of lats:-35.4218444 to -35.1613889
 range of lons:149.0192219 to 149.191257

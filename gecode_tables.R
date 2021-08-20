@@ -6,6 +6,8 @@ library(tidyverse)
 library(DescTools)
 library(knitr)
 library(mapview)
+library(arsenal)
+
 
 
 fixgeo <- function(search,  lat, lon, tt=tab3) {
@@ -40,8 +42,6 @@ lu
 #check if there was an update....
 ff <- list.files("c:/Bernd/R/covid_canberra/data/")
 wu <- grep(lu, ff)
-
-
 
 
 if(length(wu)==0)
@@ -182,14 +182,13 @@ writeLines(lup, "c:/Bernd/R/covid_canberra/lastupdated.csv")
 
 
 
-
 if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") else {
   
   cat("Data have been updated.\nNew data is from:", lup,"\n")
   
   #latest files
-  flast <- list.files("./data/", pattern="table_")
-  t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[2]]
+  flast <- list.files("c:/Bernd/R/covid_canberra/data/", pattern="table_")
+  t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[8]]
   ldata <- read.csv(file.path("c:/bernd/r/covid_canberra/data","last.csv"))
   l2data <- read.csv(file.path("c:/bernd/r/covid_canberra/data",t.name)) 
   
@@ -202,15 +201,17 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   nm <- leaflet() %>% addTiles()
   if (nrow(obsx)>0) {
     cat("New added location:\n")
+    cat(kable(ldata[obsx$observation,c(1:10)]))
     newobs <- obsx$observation
-    ldata[newobs,c(1:10)]
+    labs <- paste(ldata$Contact, ldata$Status,ldata$Exposure.Location, ldata$Street, ldata$Suburb, ldata$Date,ldata$Arrival.Time, ldata$Departure.Time, ldata$doubles, sep="<br/>") 
     
-    nm <- nm %>% addCircleMarkers(lat=tab3$lat[newobs], lng=tab3$lon[newobs],popup = labs[newobs], weight=0.5, color = "purple", radius = 5 , fillOpacity = 1)
+    
+    nm <- nm %>% addCircleMarkers(lat=ldata$lat[newobs], lng=ldata$lon[newobs],popup = labs[newobs], weight=0.5, color = "purple", radius = 5 , fillOpacity = 1)
     nm
     }
   if (nrow(obsy)>0) {
     cat("Removed locations:\n")
-    l2data[obsy$observation,c(1:10)]
+    cat(kable(l2data[obsy$observation,c(1:10)]))
   }
   
   scomp$comparison.summary.table  
@@ -234,8 +235,8 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   dlon <- paste0("range of lons:",paste0(range(ldata$lon), collapse = " to "))
   attach <- c(attach, dlat, dlon)
   writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach.txt")
-  
-  mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
+#mapshot by script does not work  
+ # mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
   tolist <-  c("bernd.gruber@canberra.edu.au")
   #tolist <- c("bernd.gruber@canberra.edu.au", "Luis.MijangosAraujo@canberra.edu.au", "Anthony.Davidson@canberra.edu.au")
   

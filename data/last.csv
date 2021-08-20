@@ -20,7 +20,7 @@
 "","Gold Creek School, Senior Campus Gym","Kelleway Ave","Nicholls","09/08/2021 - Monday","5:00pm","9:30pm","Close",-35.1799885,149.0941286,"",FALSE
 "","Club Lime, Lower Ground Floor, Bonner House","Bradley Street","Phillip","09/08/2021 - Monday","5:30pm","7:30pm","Close",-35.3460021,149.0875902,"",FALSE
 "","Club Lime, CISAC","100 Eastern Valley Way","Bruce","09/08/2021 - Monday","7:00pm","9:00pm","Close",-35.2419481,149.0749904,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
-"","UCSSC Lake Ginninderra: Gymnasium and Cafeteria/Canteen area","2 Emu Bank","Belconnen","09/08/2021 - Monday","10:00am","1:30pm","Close",-35.2387098,149.0736849,"",FALSE
+"","UCSSC Lake Ginninderra: Gymnasium and Cafeteria/Canteen area","2 Emu Bank","Belconnen","09/08/2021 - Monday","10:00am","1:30pm","Close",-35.2387098,149.0737099,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","F45 Training","10 National Circuit","Barton","10/08/2021 - Tuesday","5:00am","8:00am","Close",-35.3085945,149.1339674,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Pellegrino’s Café","7/49 Wollongong Street","Fyshwick","10/08/2021 - Tuesday","7:15am","8:15am","Close",-35.3247984,149.1795404,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Gold Creek School (including early childhood learning)","Kelleway Avenue","Nicholls","10/08/2021 - Tuesday","8:00am","3:10pm","Close",-35.1812815,149.1004954,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
@@ -242,7 +242,7 @@
 "","Canberra Centre","148 Bunda Street","Canberra City","09/08/2021 - Monday","10:30am","12:00pm","Monitor",-35.2802938,149.1332387,"",FALSE
 "","Coles Supermarket  Manuka","Franklin Street &, Flinders Way","Manuka","15/08/2021 - Sunday","11:15am","12:00pm","Monitor",-35.32102,149.134175,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Lyneham IGA","1 Wattle Place","Lyneham","13/08/2021 - Friday","11:00am","11:45am","Monitor",-35.2520717,149.1248094,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
-"","UCSSC Lake Ginninderra (Entire Campus excluding Gymnasium and Cafeteria/Canteen area. Refer to Close Contact entry if you attended Gymnasium and Cafeteria/Canteen area)","2 Emu Bank","Belconnen","09/08/2021 - Monday","10:00am","1:30pm","Monitor",-35.2386423,149.07371,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
+"","UCSSC Lake Ginninderra (Entire Campus excluding Gymnasium and Cafeteria/Canteen area. Refer to Close Contact entry if you attended Gymnasium and Cafeteria/Canteen area)","2 Emu Bank","Belconnen","09/08/2021 - Monday","10:00am","1:30pm","Monitor",-35.2387098,149.0736599,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Westfield Belconnen","204 Benjamin Way, Belconnen","Belconnen","12/08/2021 - Thursday","7:30am","9:00am","Monitor",-35.2380765,149.0650172,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Gungahlin Marketplace","30 Hibberson St, Gungahlin","Gungahlin","12/08/2021 - Thursday","11:30am","2:00pm","Monitor",-35.1846599,149.1347512,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","UC Library","Building 8, University of Canberra","Bruce","11/08/2021 - Wednesday","8:00pm","9:00pm","Monitor",-35.2379692,149.0835982,"",FALSE
@@ -253,7 +253,7 @@
 "","Capital Chemist","9 Sargood Street","O'Connor","14/08/2021 - Saturday","7:55pm","8:10pm","Monitor",-35.2639132,149.122561,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Westfield Belconnen - bus stop entrance","204 Benjamin Way","Belconnen","10/08/2021 - Tuesday","7:45am","8:45am","Monitor",-35.2380765,149.0649672,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "New","Florey (John Cleland Crescent) to Belconnen (Lake Ginninderra College) (BUS415)","","Public Transport","09/08/2021 - Monday","1:00pm","1:15pm","Casual",-35.2232616,149.0550476,"",FALSE
-"New","Belconnen (Lake Ginninderra College) to Florey (John Cleland Crescent) (BUS431)","","Public Transport","09/08/2021 - Monday","4:00pm","4:15pm","Casual",-35.2386423,149.07366,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
+"New","Belconnen (Lake Ginninderra College) to Florey (John Cleland Crescent) (BUS431)","","Public Transport","09/08/2021 - Monday","4:00pm","4:15pm","Casual",-35.2386423,149.073685,"",FALSE
 "New","Greenshed","Flemington Rd Mitchell","Mitchell","11/08/2021 - Wednesday","9:45am","2:15pm","Monitor",-35.2135216,149.1475039,"",FALSE
 "New","Woolworths Charnwood","25-30 Charnwood Place","Charnwood","14/08/2021 - Saturday","1:00pm","3:00pm","Casual",-35.2045295,149.0328328,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "New","Meatways Kambah Butcher","Floor 1, Marconi Cres","Kambah","14/08/2021 - Saturday","1:20pm","2:00pm","Monitor",-35.380305,149.057822,"",FALSE
