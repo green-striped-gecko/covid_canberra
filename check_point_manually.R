@@ -4,8 +4,8 @@
 #206
 
 
-mb <- m
-ss <-"U14 girls AFL Ainslie Red" 
+
+ss <-"Golden touch Kedmar" 
 ii <- grep(ss, tab3$Exposure.Location)
 ii
 
@@ -15,7 +15,7 @@ tm <- tm %>% addCircleMarkers(lat=tab3$lat[ii], lng=tab3$lon[ii],popup = labs[ii
 tm
 
 
-dd <- geocode("Aranda Playing Fields, Canberra, Australia")
+dd <- geocode("33 Hibberson St, Gungahlin, Canberra, Australia")
 as.data.frame(dd)
 
 

@@ -8,7 +8,7 @@ es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covi
 
 #check update
 ll <- es %>%
-  html_nodes("p") %>%
+  html_nodes("strong") %>%
   html_text()
 index <- grep("Page last updated:",ll)
 current <- ll[index]

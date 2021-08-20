@@ -20,11 +20,11 @@ gapi <- readLines("gapi.txt")
 register_google(gapi)
 
 #grab from website
-es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
+es <- read_html("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations", )
 
 #check update
 ll <- es %>%
-  html_nodes("p") %>%
+  html_nodes("strong") %>%
   html_text()
 index <- grep("Page last updated:",ll)
 dummy <- ll[index]
@@ -32,10 +32,20 @@ lup <- dummy
 lu <- substr(strsplit(dummy,"updated:")[[1]][2],2,100)
 lu <- gsub(" ", "_",lu)
 lu <- gsub(":","",lu)
+lu
+#check if there was an update....
+ff <- list.files("./data/")
+wu <- grep(lu, ff)
+
+
+
+
+if(length(wu)==0)
+{
 
 ##### scrape covid exposure table from website
 
-rD <- rsDriver(browser="firefox", port=4545L, verbose=TRUE)
+rD <- rsDriver(browser="firefox", port=4545L, verbose=FALSE)
 remDr <- rD[["client"]]
 remDr$navigate("https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations")
 
@@ -63,15 +73,10 @@ tab3 <- data.frame(tbls)
 #change empty to previous
 tab3$Status <- ifelse(tab3$Status=="New","New","")
 #tab3$type <- paste(tab3$Contact, tab3$Status)
-#check if there was an update....
-ff <- list.files("./data/")
-wu <- grep(lu, ff)
 
 
 
 
-if(length(wu)==0)
-{
 
 cols <- c("red", "yellow", "blue")
 
@@ -100,6 +105,8 @@ tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.065
 
 tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.0800225)
 
+tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 ######################################################
 
 #latest files
@@ -108,13 +115,37 @@ t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[1]]
 ltab <- read.csv(file.path("data",t.name)) 
 if (identical(ltab[,1:6], tab3[,1:6])) cat("Casual table [table #1] has not changed \n")
 
+lalo <- paste(tab3$lat, tab3$lon)
+tt <- table(lalo)
+doubles <- names(tt)[tt>1]
+index <- which(lalo %in% doubles)
 
-tab3$lat <- jitter(tab3$lat,1)
-tab3$lon <- jitter(tab3$lon,1)
+tab3$doubles <- ""
+tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>"
 
 
 
-labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+index <- which(tab3$doubles!="")
+tab3$moved <-FALSE
+
+for ( i in 1:length(index))
+{
+  
+  dbs <- which((lalo %in% lalo[index[i]]))
+  if (tab3$moved[dbs[1]]==FALSE) {
+    
+    mm <- seq(0, (length(dbs)-1)*0.00005,0.00005 )
+    mm <- mm-mean(mm)
+    tab3$lon[dbs] <- tab3$lon[dbs] -mm
+    
+    tab3$moved[dbs]<- TRUE
+  }
+}
+
+
+labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
+
+
 
 cc <- as.numeric(factor(tab3$Contact))
 
@@ -123,21 +154,20 @@ cc <- as.numeric(factor(tab3$Contact))
 
 m <- leaflet() %>% addTiles()
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8,
-                            clusterOptions =  
-                              markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
-    var childCount = cluster.getChildCount();  
-    if (childCount < 100) {  
-      c = 'rgba(64, 64, 64, 0.3);'
-    } else if (childCount < 1000) {  
-      c = 'rgba(64, 64, 64, 0.3);'  
-    } else { 
-      c = 'rgba(64, 64, 64, 0.3);'  
-    }    
-    return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
-
-  }")                            
-                              )
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8
+   #                                                                                                                                                       ,clusterOptions =  
+   #                             markerClusterOptions(spiderfyOnMaxZoom = FALSE, zoomToBoundsOnClick = FALSE,showCoverageOnHover = FALSE, iconCreateFunction=JS("function (cluster) {    
+   # var childCount = cluster.getChildCount();  
+   #   if (childCount < 100) {  
+   #     c = 'rgba(64, 64, 64, 0.3);'
+   #   } else if (childCount < 1000) {  
+   #     c = 'rgba(64, 64, 64, 0.3);'  
+   #   } else { 
+   #     c = 'rgba(64, 64, 64, 0.3);'  
+   #   }    
+   #   return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(5, 5) });
+   # 
+   # }"))
 )
 m 
 ###############################################
@@ -152,6 +182,7 @@ m
 write.csv( tab3,"./data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
 
+Sys.sleep(5)
 rmarkdown::render("Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup=lup), output_file = "index.html")
 ####################################################
 

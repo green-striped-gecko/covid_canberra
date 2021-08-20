@@ -151,6 +151,7 @@
 "","Woolworths Dickson","1 Dickson Place","Dickson","11/08/2021 - Wednesday","3:00pm","3:30pm","Casual",-35.249974,149.1387001,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Coles Supermarket Manuka","Franklin Street &, Flinders Way","Griffith","11/08/2021 - Wednesday","6:00pm","6:45pm","Casual",-35.32102,149.134225,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Woolworths Charnwood","25-30 Charnwood Place","Charnwood","11/08/2021 - Wednesday","6:30pm","7:10pm","Casual",-35.2045295,149.0328828,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
+"","Southern Cross Basketball Club Stadium","7 Pitman Street","Greenway","11/08/2021 - Wednesday","8:30pm","10:00pm","Casual",-35.4155197,149.0634807,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Xian Restaurant,","1/140 Emu Bank","Belconnen","11/08/2021 - Wednesday","9:15pm","9:45pm","Casual",-35.2398237,149.0748244,"",FALSE
 "","Abode Hotel (Floors 1, 2 and 3)","14 Kennedy Street","Kingston","12/08/2021 - Thursday","12:00am","7:00pm","Casual",-35.31713,149.141105,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","EQ Bakehouse","70 Kent Street","Deakin","12/08/2021 - Thursday","7:00am","10:00am","Casual",-35.3204751,149.0973481,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
@@ -216,6 +217,7 @@
 "","Supabarn","15 Kingsland Parade","Casey","13/08/2021 - Friday","3:00pm","3:34pm","Casual",-35.1741413,149.0959754,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Stockade Gym","7 Kembla St","Fyshwick","11/08/2021 - Wednesday","5:00pm","6:00pm","Casual",-35.325788,149.1778979,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Golden touch Kedmar, pop-up Gungahlin marketplace","30 & 33 Hibberson St","Gungahlin","12/08/2021 - Thursday","9:45am","10:30am","Casual",-35.1848509,149.1331638,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
+"","Southern Cross basketball stadium","7 Pitman Street","Tuggeranong","11/08/2021 - Wednesday","8:30pm","9:00pm","Casual",-35.4155197,149.0634307,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Woolworths Dickson","1 Dickson Pl","Dickson","11/08/2021 - Wednesday","3:00pm","3:30pm","Casual",-35.249974,149.1385501,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Bus Route 9 Transport Canberra BUS720","Dickson Interchange to Watson","Public Transport","12/08/2021 - Thursday","3:18pm","3:32pm","Casual",-35.250558,149.133564,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Bus Route 9 Transport Canberra BUS456","Watson to Dickson Interchange","Public Transport","12/08/2021 - Thursday","8:25am","8:34am","Casual",-35.250558,149.133514,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
@@ -230,7 +232,7 @@
 "","Abode Hotel (Ground Floor only)","14 Kennedy St","Kingston","11/08/2021 - Wednesday","7:50am","7:00pm","Monitor",-35.31713,149.141055,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
 "","Ochre Medical Centre","Level 1, Green Square Centre, 62 Jardine Street","Kingston","11/08/2021 - Wednesday","4:30pm","4:40pm","Monitor",-35.3158701,149.1414428,"",FALSE
 "","Abode Hotel (Ground Floor only)","14 Kennedy St","Kingston","12/08/2021 - Thursday","7:50am","7:00pm","Monitor",-35.31713,149.141005,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE
-"","Bunnings Tuggeranong","Anketell St","Greenway","11/08/2021 - Wednesday","10:15am","10:50am","Monitor",-35.4218444,149.0711101,"",FALSE
+"","Bunnings Tuggeranong","Anketell St, Greenway","Tuggeranong","11/08/2021 - Wednesday","10:15am","10:50am","Monitor",-35.4218444,149.0711101,"",FALSE
 "","Weston Creek Food Works","FoodWorks, 3, 40 Holder Pl, Holder","Holder","13/08/2021 - Friday","5:00pm","5:10pm","Monitor",-35.3365862,149.0440993,"",FALSE
 "","Woolworths Kippax","48 Hardwick Cres, Holt","Holt","10/08/2021 - Tuesday","11:00am","11:15am","Monitor",-35.2228703,149.0201727,"",FALSE
 "","ALDI Kippax,","50-60 Hardwick Crescent, Kippax Pl, Holt","Holt","12/08/2021 - Thursday","1:20pm","2:00pm","Monitor",-35.2210845,149.0192219,"",FALSE
@@ -266,4 +268,4 @@
 "New","Officeworks","1 WHYALLA Street","Fyshwick","13/08/2021 - Friday","5:25pm","6:05pm","Casual",-35.3343363,149.1715514,"",FALSE
 "New","7-Eleven","86 Parramatta Street","Phillip","13/08/2021 - Friday","10:55am","11:10am","Monitor",-35.3550615,149.0911059,"",FALSE
 "","Gold Creek Senior Campus Gym","26 Kelleway Ave, Nicholls ACT 2913","Nicholls","09/08/2021 - Monday","5:00pm","10:00pm","Close",-35.180775,149.1004975,"",FALSE
-"","Southern Cross basketball stadium","7 Pitman Street","Tuggeranong","11/08/2021 - Wednesday","6:30pm","10:00pm","Casual",-35.4155197,149.0634307,"",FALSE
+"","Southern Cross basketball stadium","7 Pitman Street","Tuggeranong","11/08/2021 - Wednesday","6:30pm","10:00pm","Casual",-35.4155197,149.0633807,"<strong/>!Location has more than<br> one entry. Zoom in and search table!</strong/>",TRUE

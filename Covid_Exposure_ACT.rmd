@@ -23,30 +23,33 @@ tab3 <- read.csv("data/last.csv")
 # Aggregate method
 cols <-c("yellow", "red", "blue")
 
-labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, sep="<br/>") 
+
 
 cc <- as.numeric(factor(tab3$Contact))
+
+labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
 
 ###############################################
 ##plot the map
 
+
+
 m <- leaflet() %>% addTiles()
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8,
-                            clusterOptions =  
-                              markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
-    var childCount = cluster.getChildCount();  
-    if (childCount < 100) {  
-      c = 'rgba(64, 64, 64, 0.3);'
-    } else if (childCount < 1000) {  
-      c = 'rgba(64, 64, 64, 0.3);'  
-    } else { 
-      c = 'rgba(64, 64, 64, 0.3);'  
-    }    
-    return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
-
-  }")                            
-                              )
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8
+  #                                                                                                                                                       , clusterOptions =  
+  #                             markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
+  #   var childCount = cluster.getChildCount();  
+  #   if (childCount < 100) {  
+  #     c = 'rgba(64, 64, 64, 0.3);'
+  #   } else if (childCount < 1000) {  
+  #     c = 'rgba(64, 64, 64, 0.3);'  
+  #   } else { 
+  #     c = 'rgba(64, 64, 64, 0.3);'  
+  #   }    
+  #   return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
+  # 
+  # }")    )
 )
 ```
 
@@ -56,7 +59,7 @@ cat(paste0("# ", params$lup))
 
 ```
 
-<sup>Disclaimer: This map shows the covid exposure locations in the ACT and is an **unofficial website** based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt, refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations).<br> Supported by Volunteers from the University of Canberra. Contact: Bernd Gruber [Contact: bernd.gruber@canberra.edu.au]</sup>
+<sup>Disclaimer: This map shows the covid exposure locations in the ACT and is an **unofficial website** based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt, refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations), which has now also an [**official map**](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations/map#Map-of-ACT-exposure-locations) included. Supported by Volunteers from the University of Canberra. Contacts: Bernd Gruber [bernd.gruber@canberra.edu.au] & Anthony Davidson [anthony.davidson@canberra.edu.au]</sup>
 
 Column {data-width=450}
 -----------------------------------------------------------------------
