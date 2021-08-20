@@ -202,7 +202,8 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
     newobs <- obsx$observation
     ldata[newobs,c(1:10)]
     nm <- leaflet() %>% addTiles()
-    nm %>% addCircleMarkers(lat=tab3$lat[newobs], lng=tab3$lon[newobs],popup = labs[newobs], weight=0.5, color = "purple", radius = 5 , fillOpacity = 1)
+    nm <- nm %>% addCircleMarkers(lat=tab3$lat[newobs], lng=tab3$lon[newobs],popup = labs[newobs], weight=0.5, color = "purple", radius = 5 , fillOpacity = 1)
+    nm
     }
   if (nrow(obsy)>0) {
     cat("Removed locations:\n")

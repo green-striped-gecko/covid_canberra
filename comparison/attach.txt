@@ -1,0 +1,30 @@
+|statistic                                                   | value|
+|:-----------------------------------------------------------|-----:|
+|Number of by-variables                                      |     0|
+|Number of non-by variables in common                        |    10|
+|Number of variables compared                                |    10|
+|Number of variables in x but not y                          |     2|
+|Number of variables in y but not x                          |     0|
+|Number of variables compared with some values unequal       |    10|
+|Number of variables compared with all values equal          |     0|
+|Number of observations in common                            |   257|
+|Number of observations in x but not y                       |    11|
+|Number of observations in y but not x                       |     0|
+|Number of observations with some compared variables unequal |   221|
+|Number of observations with all compared variables equal    |    36|
+|Number of values unequal                                    |  1223|
+
+|var.x             |var.y             |   n| NAs|
+|:-----------------|:-----------------|---:|---:|
+|Status            |Status            |  47|   0|
+|Exposure.Location |Exposure.Location | 157|   0|
+|Street            |Street            | 149|   0|
+|Suburb            |Suburb            | 127|   0|
+|Date              |Date              |  68|   0|
+|Arrival.Time      |Arrival.Time      | 147|   0|
+|Departure.Time    |Departure.Time    | 144|   0|
+|Contact           |Contact           |  21|   0|
+|lat               |lat               | 147|   0|
+|lon               |lon               | 216|   0|
+range of lats:-35.4218444 to -35.1613889
+range of lons:149.0192219 to 149.191257

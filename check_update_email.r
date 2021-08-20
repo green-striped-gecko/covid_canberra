@@ -1,6 +1,8 @@
 #monitor updates
 library(rvest)
 library(DescTools)
+library(knitr)
+library(mapview)
 last <- readLines("c:/Bernd/R/covid_canberra/lastupdated.csv")
 
 #grab from website
@@ -16,15 +18,26 @@ current <- ll[index]
 
 if (last!=current)
 {
+  #scomp <- NULL
+ 
+  source("c:/Bernd/R/covid_canberra/gecode_tables.R")
+
+  body <- paste0("New update is: ", current,"\n")
+  attach <- kable(list(scomp$comparison.summary.table, scomp$diffs.byvar.table))
+   dlat <- paste0("range of lats:",paste0(range(ldata$lat), collapse = " to "))
+   dlon <- paste0("range of lons:",paste0(range(ldata$lon), collapse = " to "))
+   attach <- c(attach, dlat, dlon)
+  writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach.txt")
+  
+  mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
  
   SendOutlookMail(to = c("bernd.gruber@canberra.edu.au"), 
-                  subject = "The has been a covid update.", 
-                  body = paste0("New update is:\n", current))
+                  subject = paste0("There has been a covid update. ", lup), 
+                  body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt", "c:/bernd/r/covid_canberra/comparison/newsites.png"))
   
-  SendOutlookMail(to = c("luis.mijangosaraujo@canberra.edu.au"), 
-                  subject = "The has been a covid update.", 
-                  body = paste0("New update is:\n", current))
+
   writeLines(current, "c:/Bernd/R/covid_canberra/lastupdated.csv")
 
   }
+
 
