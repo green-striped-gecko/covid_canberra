@@ -221,7 +221,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   
   
   
-  ######################################################################
+############################################################
   
   body <- paste0("New update is from: ", lup,"\n Please be aware data have not been curated yet and locations are assigned via a computer script.\n Therefore locations might be in the wrong place. \nPlease report locations that need to be corrected to: maybe a wiki page???\n Covid resources: 
                  \nACT health pages (official): https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations
@@ -243,11 +243,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
                   subject = paste0("New Covid Exposure sites have been added.\n ", lup), 
                   body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt"))
-  
-  
-  
-  
-  }
+}
   
  
 
