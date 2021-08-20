@@ -16,7 +16,7 @@ fixgeo <- function(search,  lat, lon, tt=tab3) {
 }
 
 #load google api
-gapi <- readLines("gapi.txt")
+gapi <- readLines("c:/bernd/r/covid_canberra/gapi.txt")
 register_google(gapi)
 
 #grab from website
@@ -168,11 +168,11 @@ m
  
  
  #once fixed save the table again and push to github
-write.csv( tab3,"./data/last.csv",row.names = FALSE)
-write.csv(tab3, paste0("./data/table_",lu,".csv"),row.names = FALSE )
+write.csv( tab3,"c:/bernd/r/covid_canberra/data/last.csv",row.names = FALSE)
+write.csv(tab3, paste0("c:/bernd/r/covid_canberra/data/table_",lu,".csv"),row.names = FALSE )
 
 Sys.sleep(5)
-rmarkdown::render("Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup=lup), output_file = "index.html")
+rmarkdown::render("c:/bernd/r/covid_canberra/Covid_Exposure_ACT.rmd", output_dir = "docs", params=list(lup=lup), output_file = "index.html")
 ####################################################
 
 }
@@ -188,8 +188,8 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   #latest files
   flast <- list.files("./data/", pattern="table_")
   t.name<- flast[order(file.mtime(file.path("data",flast)), decreasing = TRUE)[2]]
-  ldata <- read.csv(file.path("data","last.csv"))
-  l2data <- read.csv(file.path("data",t.name)) 
+  ldata <- read.csv(file.path("c:/bernd/r/covid_canberra/data","last.csv"))
+  l2data <- read.csv(file.path("c:/bernd/r/covid_canberra/data",t.name)) 
   
 
   comp <- comparedf(ldata, l2data)
@@ -197,11 +197,12 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
  
   obsy <- scomp$obs.table[scomp$obs.table$version=="y",]
   obsx <- scomp$obs.table[scomp$obs.table$version=="x",]
+  nm <- leaflet() %>% addTiles()
   if (nrow(obsx)>0) {
     cat("New added location:\n")
     newobs <- obsx$observation
     ldata[newobs,c(1:10)]
-    nm <- leaflet() %>% addTiles()
+    
     nm <- nm %>% addCircleMarkers(lat=tab3$lat[newobs], lng=tab3$lon[newobs],popup = labs[newobs], weight=0.5, color = "purple", radius = 5 , fillOpacity = 1)
     nm
     }
