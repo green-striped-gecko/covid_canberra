@@ -18,12 +18,11 @@ library(leaflet)
 library(plotly)
 library(flexdashboard)
 library(DT)
+library(crosstalk)
 #latest dataset
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
 cols <-c("yellow", "red", "blue")
-
-
 
 cc <- as.numeric(factor(tab3$Contact))
 
@@ -67,71 +66,149 @@ Column {data-width=450}
 ### Map of Exposure sites
 
 ```{r}
-
+library(sparkline)
 #checks 
-m
+# m
+library(crosstalk)
 
+#latest dataset
+tab3 <- read_csv(here::here("data/last.csv"))
+
+# Aggregate method
+cols <-c("yellow", "red", "blue")
+
+cc <- as.numeric(factor(tab3$Contact))
+
+labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
+
+length(unique(tab3$Suburb))
+names(tab3)
+# generally speaking, use a "unique" key for filter, 
+# especially when you have multiple filters!
+tx <- highlight_key(tab3)
+
+gg <- ggplot(tx) + geom_point(aes(Date, Contact, group = Contact, colour = Contact))
+
+filter <- bscols(
+  filter_select("Suburb", "Select a suburb", tx, ~Suburb),
+  ggplotly(gg, dynamicTicks = TRUE),
+  widths = c(6, 6)
+)
+
+tx2 <- highlight_key(tab3, ~Contact, "Select a level")
+
+gg <- ggplot(tx2) + geom_histogram(aes(Contact, group = Suburb), stat = "count")
+select <- highlight(
+  ggplotly(gg, tooltip = "Suburb"), 
+  selectize = FALSE, persistent = TRUE
+)
+
+bscols(filter, select)
 
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+<!-- Column {data-width=350} -->
+<!-- ----------------------------------------------------------------------- -->
+<!-- ### Sparkline -->
 
-### Table
-
-```{r}
-dtt <-DT::datatable(tab3[,c(1,8,2:7)],
-  rownames = FALSE, options = list(pageLength = 50, ausoHideNavigation=TRUE, 
-  initComplete = JS(
-        "function(settings, json) {",
-        "$(this.api().table().header()).css({'font-size': '50%'});",
-
-        "}")))  %>% DT::formatStyle(columns = 1:8, fontSize='70%') 
-
-dtt
-
-```
+<!-- ```{r} -->
+<!-- library(htmlwidgets) -->
+<!-- library(sparkline) -->
+<!-- set.seed(1234) -->
+<!-- x = rnorm(10) -->
+<!-- y = rnorm(10) -->
+<!-- sparkline(abs(x), type = 'bar', height = 50, width = 100) -->
+<!-- ``` -->
 
 
+<!-- - Inline line graphs `r #sparkline(x)` -->
 
-```{r}
+<!-- - bar charts  `r #sparkline(abs(x), type = 'bar')`   -->
 
-### Chart C
-# names(tab3)
-# glimpse(tab3)
+<!-- - negative values: `r #sparkline(x, type = 'bar')` -->
 
-# countSub <- as.data.frame(table(as.factor(tab3$Suburb)))
-# names(countSub) <- c("Suburb", "Total Count")
-# 
-# 
-# # ggplot(countSub) + 
-# #   geom_point(aes(x = Var1, y = Freq, col = Status))
-# 
-# 
-# locs <- select(tab3, lat, lon, Suburb)
-# 
-# plotdat1 <- left_join(countSub, tab3, by = "Suburb")
-# 
-# # length(unique(as.factor(tab3$Suburb)))
-# tab4 <- tab3 %>%
-#   group_by(Suburb) %>%
-#     summarise(count = length(as.factor(Suburb)),
-#               lat = mean(lat),
-#               lon = mean(lon)) 
-# 
-# tab5 <- tab4 %>%
-# group_by(count)%>%
-#       arrange(desc = TRUE, .by_group = TRUE)
-#               
-#               # ,
-# 
-# # glimpse(tab4)
-# # glimpse(plotdat1)
-# #filter on location
-# 
-# ggplot(tab5) + 
-#   geom_point(aes(x = Suburb, y = count), size = 3) + 
-#   theme(axis.text.x = element_text(angle = 90))
-```
+<!-- - sizing inline `r #sparkline(abs(x), type = 'bar', height = 50, width = 100)` -->
+
+<!-- ### Table -->
+
+<!-- ```{r eval = FALSE} -->
+<!-- library(DT) -->
+<!-- dtt <-DT::datatable(tab3[,c(1,8,2:7)], -->
+<!--   rownames = FALSE, options = list(pageLength = 50, ausoHideNavigation=TRUE,  -->
+<!--   initComplete = JS( -->
+<!--         "function(settings, json) {", -->
+<!--         "$(this.api().table().header()).css({'font-size': '50%'});", -->
+
+<!--         "}")))  %>% DT::formatStyle(columns = 1:8, fontSize='70%')  -->
+
+<!-- dtt -->
+
+<!-- ``` -->
+
+<!-- <!-- ### Dynamic timeline --> -->
+
+<!-- <!-- ```{r include = FALSE} --> -->
+<!-- <!-- names(tab3) --> -->
+<!-- <!-- glimpse(tab3) --> -->
+
+<!-- <!-- countSub <- as.data.frame(table(as.factor(tab3$Suburb))) --> -->
+<!-- <!-- names(countSub) <- c("Suburb", "Total Count") --> -->
+
+
+<!-- <!-- # ggplot(countSub) + --> -->
+<!-- <!-- #   geom_point(aes(x = Var1, y = Freq, col = Status)) --> -->
+
+
+<!-- <!-- locs <- select(tab3, lat, lon, Suburb) --> -->
+
+<!-- <!-- plotdat1 <- left_join(countSub, tab3, by = "Suburb") --> -->
+
+<!-- <!-- # length(unique(as.factor(tab3$Suburb))) --> -->
+<!-- <!-- tab4 <- tab3 %>% --> -->
+<!-- <!--   group_by(Suburb) %>% --> -->
+<!-- <!--     summarise(count = length(as.factor(Suburb)), --> -->
+<!-- <!--               lat = mean(lat), --> -->
+<!-- <!--               lon = mean(lon)) --> -->
+
+<!-- <!-- tab5 <- tab4 %>% --> -->
+<!-- <!-- group_by(count)%>% --> -->
+<!-- <!--       arrange(desc = TRUE, .by_group = TRUE) --> -->
+
+<!-- <!--               # , --> -->
+
+<!-- <!-- # glimpse(tab4) --> -->
+<!-- <!-- # glimpse(plotdat1) --> -->
+<!-- <!-- #filter on location --> -->
+
+<!-- <!-- # ggplot(tab5) + --> -->
+<!-- <!-- #   geom_point(aes(x = Suburb, y = count), size = 3) + --> -->
+<!-- <!-- #   theme(axis.text.x = element_text(angle = 90)) --> -->
+<!-- <!-- ``` --> -->
+
+<!-- Column {data-width=50} -->
+<!-- ----------------------------------------------------------- -->
+<!-- ### Info -->
+
+<!-- Extracted from the ACT goverment website at `r Sys.time()`. This application is intended to make finding and understanding contact locations easier in the ACT.  -->
+
+<!-- ### New CLOSE contacts  -->
+
+<!-- `r Sys.Date()`<!-- Checked at 17082021 -->  -->
+
+<!-- ```{r} -->
+<!-- articles <- table(tab3$Status)[2]#computeArticles() -->
+<!-- valueBox(articles, icon = "fa-pencil") -->
+<!-- ``` -->
+
+<!-- ### CASUAL contacts `r #sparkline(x)` -->
+
+<!-- ```{r} -->
+<!-- articles <- table(tab3$Status)[2]#computeArticles() -->
+<!-- valueBox(articles, icon = "fa-pencil") -->
+<!-- ``` -->
+
+
+<!-- https://covid19nearme.com.au/state/act -->
+
 
 

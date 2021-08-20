@@ -1,0 +1,26 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(htmlwidgets)
+library(sparkline)
+set.seed(1234)
+x = rnorm(10)
+y = rnorm(10)
+```
+
+
+Inline line graphs `r sparkline(x)`
+
+Bar charts  `r sparkline(abs(x), type = 'bar')`  negative values: `r sparkline(x, type = 'bar')`
+<br>
+
+|   Stock  |   Sparkline           |        Boxplot                      |
+|----------|-----------------------|-------------------------------------|
+|    x     |   `r sparkline(x)`    |     `r sparkline(x, type ='box')`   |
+|    y     |   `r sparkline(y)`    |    `r sparkline(y, type ='box')`    |
+<br>
