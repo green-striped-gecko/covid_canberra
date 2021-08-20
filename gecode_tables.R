@@ -210,6 +210,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   }
   
   scomp$comparison.summary.table  
+  #scomp$diffs.table
   }
   
  
