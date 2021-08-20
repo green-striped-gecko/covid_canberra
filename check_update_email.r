@@ -1,5 +1,7 @@
 
-stop("stop for now")
+#switch off
+#stop("Switched off for testing")
+
 #monitor updates
 library(rvest)
 library(DescTools)
