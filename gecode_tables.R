@@ -242,7 +242,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   
   SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
                   subject = paste0("New Covid Exposure sites have been added.\n ", lup), 
-                  body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt", "c:/bernd/r/covid_canberra/comparison/newsites.png"))
+                  body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt"))
   
   
   
