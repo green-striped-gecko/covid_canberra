@@ -1,0 +1,124 @@
+---
+title: "Covid19 exposure locations in the ACT"
+resource_files:
+- data/last.csv
+#runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+params:
+    lup: "unknown"
+---
+
+```{r setup, include=TRUE}
+library(tidyverse)
+library(ggmap)
+library(leaflet)
+library(plotly)
+library(flexdashboard)
+library(DT)
+#latest dataset
+tab3 <- read.csv("data/last.csv")
+# Aggregate method
+cols <-c("yellow", "red", "blue")
+
+
+
+cc <- as.numeric(factor(tab3$Contact))
+
+labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
+
+###############################################
+##plot the map
+
+
+
+m <- leaflet() %>% addTiles()
+
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) 
+m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols)
+```
+
+```{r title, results='asis'} 
+
+cat(paste0("# ", params$lup))
+
+```
+
+<sup>Disclaimer: This map shows the covid exposure locations in the ACT and is an **unofficial website** based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt, refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations), which has now also an [**official map**](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations/map#Map-of-ACT-exposure-locations) included. Supported by Volunteers from the University of Canberra. Contacts: Bernd Gruber [bernd.gruber@canberra.edu.au] & Anthony Davidson [anthony.davidson@canberra.edu.au]</sup>
+
+Column {data-width=450}
+-----------------------------------------------------------------------
+
+### Map of Exposure sites
+
+```{r}
+
+#checks 
+m
+
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Table
+
+```{r}
+dtt <-DT::datatable(tab3[,c(1,8,2:7)],
+  rownames = FALSE, options = list(pageLength = 50, ausoHideNavigation=TRUE, 
+  initComplete = JS(
+        "function(settings, json) {",
+        "$(this.api().table().header()).css({'font-size': '50%'});",
+
+        "}")))  %>% DT::formatStyle(columns = 1:8, fontSize='70%') 
+
+dtt
+
+```
+
+
+
+```{r}
+
+### Chart C
+# names(tab3)
+# glimpse(tab3)
+
+# countSub <- as.data.frame(table(as.factor(tab3$Suburb)))
+# names(countSub) <- c("Suburb", "Total Count")
+# 
+# 
+# # ggplot(countSub) + 
+# #   geom_point(aes(x = Var1, y = Freq, col = Status))
+# 
+# 
+# locs <- select(tab3, lat, lon, Suburb)
+# 
+# plotdat1 <- left_join(countSub, tab3, by = "Suburb")
+# 
+# # length(unique(as.factor(tab3$Suburb)))
+# tab4 <- tab3 %>%
+#   group_by(Suburb) %>%
+#     summarise(count = length(as.factor(Suburb)),
+#               lat = mean(lat),
+#               lon = mean(lon)) 
+# 
+# tab5 <- tab4 %>%
+# group_by(count)%>%
+#       arrange(desc = TRUE, .by_group = TRUE)
+#               
+#               # ,
+# 
+# # glimpse(tab4)
+# # glimpse(plotdat1)
+# #filter on location
+# 
+# ggplot(tab5) + 
+#   geom_point(aes(x = Suburb, y = count), size = 3) + 
+#   theme(axis.text.x = element_text(angle = 90))
+```
+
+
