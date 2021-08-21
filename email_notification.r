@@ -59,7 +59,7 @@ dlon <- paste0("range of lons:",paste0(range(ldata$lon), collapse = " to "))
 
 
 attach <- c(attach, dlat, dlon)
-writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach_email.txt")
+writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/changes_since_last_update.txt")
 
 mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites_email.png")
 tolist <-  c("bernd.gruber@canberra.edu.au")
@@ -67,5 +67,5 @@ tolist <-  c("bernd.gruber@canberra.edu.au")
 
 SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
                 subject = paste0("New Covid Exposure sites have been added.\n ", lup), 
-                body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach_email.txt", "c:/bernd/r/covid_canberra/comparison/newsites_email.png"))
+                body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/changes_since_last_update.txt", "c:/bernd/r/covid_canberra/comparison/newsites_email.png"))
 
