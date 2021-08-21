@@ -52,6 +52,11 @@ wu <- grep(lu, ff)
 if(length(wu)==0)
 {
 
+  l1 <- paste("New update available. Current data is from:", lu,"\nTrying to run geocode_tables.R now\n")
+  l2 <- as.character(Sys.time())
+  writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")  
+  
+
 ##### scrape covid exposure table from website
 
 rD <- rsDriver(browser="firefox", port=4545L, verbose=FALSE)
@@ -181,6 +186,11 @@ write.csv( tab3,"c:/bernd/r/covid_canberra/data/last.csv",row.names = FALSE)
 write.csv(tab3, paste0("c:/bernd/r/covid_canberra/data/table_",lu,".csv"),row.names = FALSE )
 writeLines(lup, "c:/Bernd/R/covid_canberra/lastupdated.csv")
 
+l1 <- paste("Updated tab3 and last.csv. Current data is from:", lu,"\nYou should have received a notification email now.\n")
+l2 <- as.character(Sys.time())
+writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")
+
+
 ####################################################
 }
 
@@ -254,6 +264,13 @@ if(length(wu)>0) {
   SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
                   subject = paste0("Bernd new Covid Exposure sites have been added.Update needed\n ", lup), 
                   body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt"))
+  
+  l1 <- paste("Updated tab3 and last.csv. Current data is from:", lu,"\nSend an email. Check the coordinates!!!!!!.\n")
+  l2 <- as.character(Sys.time())
+  writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")
+  
+  
+  
 }
   
  
