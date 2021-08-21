@@ -2,11 +2,11 @@
 
 
 #206
+tab3[which(tab3$lon<145),1:6]
 
-
-
-ss <-"Golden touch Kedmar" 
-ii <- grep(ss, tab3$Exposure.Location)
+column="Street"
+ss <-"Franklin Street & Flinders Way" 
+ii <- grep(ss, tab3[, which(column==colnames(tab3))])
 ii
 
 tab3[ii,]
@@ -15,7 +15,7 @@ tm <- tm %>% addCircleMarkers(lat=tab3$lat[ii], lng=tab3$lon[ii],popup = labs[ii
 tm
 
 
-dd <- geocode("33 Hibberson St, Gungahlin, Canberra, Australia")
+dd <- geocode("Coles Manuka, Franklin Street, Canberra, Australia")
 as.data.frame(dd)
 
 
@@ -25,4 +25,4 @@ tm
 #tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
 #cat(paste0('tab3 <- fixgeo("',ss,'", lat =   ', -35.23793, ', lon =', 149.0653,')' ))
 
-cat(paste0('tab3 <- fixgeo("',ss,'", lat =   ', dd$lat, ', lon =', dd$lon,')' ))
+cat(paste0('tab3 <- fixgeo("',ss,'", column = "',column,'"  , lat =   ', dd$lat, ', lon =', dd$lon,')' ))
