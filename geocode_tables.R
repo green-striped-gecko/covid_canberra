@@ -92,7 +92,6 @@ tab3$Status <- ifelse(tab3$Status=="New","New","")
 
 
 
-cols <- c("red", "yellow", "orange", "blue")
 
 #get coordinates
 address <- geocode(paste0( tab3$Street,", ", tab3$Exposure.Location,", ",tab3$Suburb ,", Canberra, Australia"))
@@ -155,6 +154,7 @@ for ( i in 1:length(index))
   }
 }
 
+cols <- c( "yellow", "red","cyan", "blue")
 
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
 
@@ -174,7 +174,7 @@ cc <- as.numeric(factor(tab3$Contact))
 m <- leaflet() %>% addTiles()
 
 m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
-m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols)
+m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
 m 
 ###############################################
 

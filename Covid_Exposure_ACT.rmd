@@ -22,7 +22,8 @@ library(DT)
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
 
-cols <- c("red", "yellow", "orange", "blue")
+cols <- c( "yellow", "red","cyan", "blue")
+
 
 
 
@@ -38,7 +39,7 @@ labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab
 m <- leaflet() %>% addTiles()
 
 m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) 
-m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols)
+m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
 ```
 
 ```{r title, results='asis'} 
