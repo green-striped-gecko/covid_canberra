@@ -40,16 +40,19 @@ scomp$diffs.table
 
 ######################################################################
 
-body <- paste0("New update is from: ", lup,"\n Please be aware data have not been curated yet and locations are assigned via a computer script.\n Therefore locations might be in the wrong place. \nPlease report locations that need to be corrected to: maybe a wiki page???\n Covid resources: 
+body <- paste0("New update is from: ", lup,"\n The attached map shows the locations added since the last update (purple dots). If the map shows the world, then there are no new locations added in this update, but still some sites have been changed (Times, Type of Contact etc)\n You can check the changes in the attached tables (x are the previous entries and y are the new entries).\nPlease be aware data have not been fully curated yet and locations are assigned via a computer script.\n Therefore locations might be in the wrong place.\n Covid resources: 
                  \nACT health pages (official): https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations
                  \nACT health map: https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations/map
                  \nThis map: https://green-striped-gecko.github.io/covid_canberra/
                  \nCovid near me map: https://covid19nearme.com.au/state/act
                  
                  ")
-attach <- kable(list(scomp$comparison.summary.table, scomp$diffs.byvar.table))
+attach <- kable(list(scomp$comparison.summary.table, scomp$diffs.byvar.table ))
 dlat <- paste0("range of lats:",paste0(range(ldata$lat), collapse = " to "))
 dlon <- paste0("range of lons:",paste0(range(ldata$lon), collapse = " to "))
+
+
+
 attach <- c(attach, dlat, dlon)
 writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach_email.txt")
 
