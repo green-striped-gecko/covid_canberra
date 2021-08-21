@@ -10,13 +10,15 @@ library(arsenal)
 
 
 
-fixgeo <- function(search,  lat, lon, tt=tab3) {
+fixgeo <- function(search,  lat, lon, column="Exposure.Location",tt=tab3) {
   
   ii <- NA
-  ii <- grep(search,tt$Exposure.Location)
+  ii <- grep(search,tt[,which(column==colnames(tab3))])
+  if(length(ii>0)) {
   for (c in 1:length(ii)){
     tt[ii[c],"lat"] <-lat
     tt[ii[c],"lon"] <- lon
+  }
   }
   return(tt)
 }
@@ -92,9 +94,9 @@ tab3$lon <- address$lon
 
 ######################################################3
 ##errors (manual)
+tab3 <- fixgeo("Franklin Street &, Flinders Way", column = "Street"  , lat =   -35.3210247, lon =149.1341946)
+tab3 <- fixgeo("Franklin Street & Flinders Way", column = "Street"  , lat =   -35.3210247, lon =149.1341946)
 
-tab3<- fixgeo("Coles Supermarket Manuka", lat=-35.32102, lon=149.1342)
-tab3<- fixgeo("Coles Supermarket  Manuka", lat=-35.32102, lon=149.1342)
 
 tab3<- fixgeo("Basketball ACT", lat=-35.24185, lon=149.057)
 
@@ -109,8 +111,8 @@ tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.065
 
 tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.0800225)
 
-tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
-tab3 <- fixgeo("Golden touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 ######################################################
 
 
@@ -236,7 +238,7 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   attach <- c(attach, dlat, dlon)
   writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach.txt")
 #mapshot by script does not work  
- # mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
+  mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
   tolist <-  c("bernd.gruber@canberra.edu.au")
   #tolist <- c("bernd.gruber@canberra.edu.au", "Luis.MijangosAraujo@canberra.edu.au", "Anthony.Davidson@canberra.edu.au")
   
