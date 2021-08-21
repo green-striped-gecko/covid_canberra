@@ -46,6 +46,9 @@ ff <- list.files("c:/Bernd/R/covid_canberra/data/")
 wu <- grep(lu, ff)
 
 
+
+
+
 if(length(wu)==0)
 {
 
@@ -184,7 +187,13 @@ writeLines(lup, "c:/Bernd/R/covid_canberra/lastupdated.csv")
 
 
 
-if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") else {
+
+if(length(wu)>0) {
+  
+  l1 <- paste("No new update available. Current data is from:", lu,"\n")
+  l2 <- as.character(Sys.time())
+  writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")
+  } else {
   
   cat("Data have been updated.\nNew data is from:", lup,"\n")
   
@@ -238,12 +247,12 @@ if(length(wu)>0) cat("No new update available. Current data is from:", lu,"\n") 
   attach <- c(attach, dlat, dlon)
   writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach.txt")
 #mapshot by script does not work  
-  mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
+  #mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
   tolist <-  c("bernd.gruber@canberra.edu.au")
   #tolist <- c("bernd.gruber@canberra.edu.au", "Luis.MijangosAraujo@canberra.edu.au", "Anthony.Davidson@canberra.edu.au")
   
   SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
-                  subject = paste0("New Covid Exposure sites have been added.\n ", lup), 
+                  subject = paste0("Bernd new Covid Exposure sites have been added.Update needed\n ", lup), 
                   body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt"))
 }
   

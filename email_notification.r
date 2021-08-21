@@ -16,6 +16,8 @@ scomp <- summary(comp)
 obsy <- scomp$obs.table[scomp$obs.table$version=="y",]
 obsx <- scomp$obs.table[scomp$obs.table$version=="x",]
 nm <- leaflet() %>% addTiles()
+newobs <- NULL
+
 if (nrow(obsx)>0) {
 
     cat("New added location:\n")
@@ -47,7 +49,10 @@ body <- paste0("New update is from: ", lup,"\n The attached map shows the locati
                  \nCovid near me map: https://covid19nearme.com.au/state/act
                  
                  ")
-attach <- kable(list(scomp$comparison.summary.table, scomp$diffs.byvar.table ))
+nc <- NULL
+if (!is.null(newobs)) {nc <- ldata[newobs,1:10]}
+
+attach <- kable(list(scomp$comparison.summary.table, scomp$diffs.byvar.table, nc ))
 dlat <- paste0("range of lats:",paste0(range(ldata$lat), collapse = " to "))
 dlon <- paste0("range of lons:",paste0(range(ldata$lon), collapse = " to "))
 
