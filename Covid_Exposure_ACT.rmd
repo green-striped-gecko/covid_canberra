@@ -21,7 +21,8 @@ library(DT)
 #latest dataset
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
-cols <-c("yellow", "red", "blue")
+
+cols <- c("red", "yellow", "orange", "blue")
 
 
 

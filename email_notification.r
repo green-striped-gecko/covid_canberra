@@ -65,6 +65,9 @@ mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites_email.png")
 tolist <-  c("bernd.gruber@canberra.edu.au")
 #tolist <- c("bernd.gruber@canberra.edu.au", "Luis.MijangosAraujo@canberra.edu.au", "Anthony.Davidson@canberra.edu.au")
 
+#tolist <- c("Bernd Gruber <bernd.gruber@canberra.edu.au>","Llara.Weaver <Llara.Weaver@canberra.edu.au>")
+
+
 SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
                 subject = paste0("New Covid Exposure sites have been added.\n ", lup), 
                 body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/changes_since_last_update.txt", "c:/bernd/r/covid_canberra/comparison/newsites_email.png"))

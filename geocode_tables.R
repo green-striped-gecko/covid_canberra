@@ -92,7 +92,7 @@ tab3$Status <- ifelse(tab3$Status=="New","New","")
 
 
 
-cols <- c("red", "yellow", "blue")
+cols <- c("red", "yellow", "orange", "blue")
 
 #get coordinates
 address <- geocode(paste0( tab3$Street,", ", tab3$Exposure.Location,", ",tab3$Suburb ,", Canberra, Australia"))
@@ -121,6 +121,10 @@ tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.080022
 
 tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+
+tab3 <- fixgeo("Coombs to City", column = "Street"  , lat =   -35.2933, lon =149.1269703)
+tab3 <- fixgeo("Coombs to Woden", column = "Street"  , lat =   -35.3444429, lon =149.0872442)
+
 ######################################################
 
 
