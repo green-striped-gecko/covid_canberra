@@ -54,14 +54,7 @@ wu <- grep(lu, ff)
 if(length(wu)==0)
 {
 
-  l1 <- paste("New update available. Current data is from:", lu,"\nTrying to run geocode_tables.R now\n")
-  l2 <- as.character(Sys.time())
-  writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")  
-  
-  SendOutlookMail(to = "bernd.gruber@canberra.edu.au", 
-                  subject = paste0("New updated. Run Geocode.R now\n ", lup), 
-                  body ="ACT health map: https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations
-\nThis map: https://green-striped-gecko.github.io/covid_canberra/")
+
   
   
   
