@@ -7,7 +7,8 @@ library(DescTools)
 library(knitr)
 library(mapview)
 library(arsenal)
-require(rgdal)
+library(rgdal)
+library(dplyr)
 
 
 addBuses = TRUE
@@ -90,44 +91,55 @@ tab3$Status <- ifelse(tab3$Status=="New","New","")
 #tab3$type <- paste(tab3$Contact, tab3$Status)
 
 ###todo check only new sites and not the once we have data from
-
 #load last.csv
-#check identical entries column(1:8)
+ldata <- read.csv("c:/bernd/r/covid_canberra/data/last.csv")
+#check identical entries column Exposure.Location
+ldata$check <- paste(ldata$Exposure.Location, ldata$Street, ldata$Suburb, ldata$Date, ldata$Arrival.Time, ldata$Departure.Time)
+tab3$check <- paste(tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date, tab3$Arrival.Time, tab3$Departure.Time)
+tab3 <- join(tab3, ldata[,c("lat","lon","check")],  by="check")
+tab3$check <- NULL
+ldata$check <- NULL
+
+toadd <- which(is.na(tab3$lat))
+
+
 #add lat lon
 #
-
-
+if (length(toadd)>0)
+{
+tt <- tab3[toadd,]
 #get coordinates only for those where lat lon is empty
 
-address <- geocode(paste0( tab3$Street,", ", tab3$Exposure.Location,", ",tab3$Suburb ,", Canberra, Australia"))
+address <- geocode(paste0( tt$Street,", ", tt$Exposure.Location,", ",tt$Suburb ,", Canberra, Australia"))
 
-tab3$lat <- address$lat
-tab3$lon <- address$lon
+tab3$lat[toadd] <- address$lat
+tab3$lon[toadd] <- address$lon
+}
 
 ######################################################3
 ##errors (manual)
-tab3 <- fixgeo("Franklin Street &, Flinders Way", column = "Street"  , lat =   -35.3210247, lon =149.1341946)
-tab3 <- fixgeo("Franklin Street & Flinders Way", column = "Street"  , lat =   -35.3210247, lon =149.1341946)
+#tab3 <- fixgeo("Franklin Street &, Flinders Way", column = "Street"  , lat =   -35.3210247, lon =149.1341946)
+#tab3 <- fixgeo("Franklin Street & Flinders Way", column = "Street"  , lat =   -35.3210247, lon =149.1341946)
 
 
-tab3<- fixgeo("Basketball ACT", lat=-35.24185, lon=149.057)
+#tab3<- fixgeo("Basketball ACT", lat=-35.24185, lon=149.057)
 
-tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
+#tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
 
 
-tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
+#tab3<- fixgeo("Flatheads Takeaway", lat=-35.264, lon=149.122)
 
-tab3 <- fixgeo("Hawker Drive In Bottle Shop", lat =   -35.2426147, lon =149.0449504)
+#tab3 <- fixgeo("Hawker Drive In Bottle Shop", lat =   -35.2426147, lon =149.0449504)
 
-tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.0653)
+#tab3 <- fixgeo("Westfield Belconnen Food Court", lat =   -35.23793, lon =149.0653)
 
-tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.0800225)
+#tab3 <- fixgeo("U14 girls AFL Ainslie Red", lat =   -35.2536251, lon =149.0800225)
 
-tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
-tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+#tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
+#tab3 <- fixgeo("Golden Touch Kedmar", lat =   -35.1848509, lon =149.1331888)
 
-tab3 <- fixgeo("Coombs to City", column = "Street"  , lat =   -35.2933, lon =149.1269703)
-tab3 <- fixgeo("Coombs to Woden", column = "Street"  , lat =   -35.3444429, lon =149.0872442)
+#tab3 <- fixgeo("Coombs to City", column = "Street"  , lat =   -35.2933, lon =149.1269703)
+#tab3 <- fixgeo("Coombs to Woden", column = "Street"  , lat =   -35.3444429, lon =149.0872442)
 
 ######################################################
 
