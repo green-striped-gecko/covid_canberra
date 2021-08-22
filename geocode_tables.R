@@ -175,40 +175,42 @@ cc <- as.numeric(factor(tab3$Contact))
 
 ###############################################
 ##plot the map
-
 m <- leaflet() %>% addTiles()
-
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
-m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
-
 
 ####################################################
 ### add bus lines mentioned
 
 
 if (addBuses) {
-#read from shape file
-busses <- readOGR(dsn = "c:/bernd/r/covid_canberra/bus", layer = "geo_export_69c76e06-1d3f-4619-be3b-b4e5789be8ca")
-
-#search all bus lines that are mentioned
-
-bindex <- grep("Bus Route", tab3$Exposure.Location)
-buslanes <- tab3$Exposure.Location[bindex]
-
-busnumbers <- gsub("Bus Route ([0-9,A-Z]+) Transport.*","\\1", buslanes)
-blineindex <- which(busses$short_name %in% busnumbers)
-blabs <- paste(paste0("Bus route: ", busses$short_name[blineindex]),"<strong> For bus stops and ","exposure times, please"," search the table." , sep="<br/>")
-bb <- (busses[blineindex,])
-coo <- coordinates(bb)
-bcols <- colorRampPalette(c("purple", "green"))( length(coo))
-
-for (ib in 1:length(coo))
-{
-  cood <- data.frame(coo[[ib]])
-  m <- m %>% addPolylines(lng=cood[,1], lat=cood[,2], color = bcols[ib], weight   = 3, opacity = 0.4, popup  = blabs[ib])
+  #read from shape file
+  busses <- readOGR(dsn = "c:/bernd/r/covid_canberra/bus", layer = "geo_export_69c76e06-1d3f-4619-be3b-b4e5789be8ca")
+  
+  #search all bus lines that are mentioned
+  
+  bindex <- grep("Bus Route", tab3$Exposure.Location)
+  buslanes <- tab3$Exposure.Location[bindex]
+  
+  busnumbers <- gsub("Bus Route ([0-9,A-Z]+) Transport.*","\\1", buslanes)
+  blineindex <- which(busses$short_name %in% busnumbers)
+  blabs <- paste(paste0("Bus route: ", busses$short_name[blineindex]),"<strong> For bus stops and ","exposure times, please"," search the table." , sep="<br/>")
+  bb <- (busses[blineindex,])
+  coo <- coordinates(bb)
+  bcols <- colorRampPalette(c("purple", "green"))( length(coo))
+  
+  for (ib in 1:length(coo))
+  {
+    cood <- data.frame(coo[[ib]])
+    m <- m %>% addPolylines(lng=cood[,1], lat=cood[,2], color = bcols[ib], weight   = 3, opacity = 0.4, popup  = blabs[ib])
+  }
+  
 }
 
-}
+
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
+m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
+
+
+
 m
 
 ###############################################
