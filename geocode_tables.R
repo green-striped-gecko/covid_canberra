@@ -318,9 +318,6 @@ if(length(wu)>0) {
   l1 <- paste("Updated tab3 and last.csv. Current data is from:", lu,"\nSend an email. Check the coordinates!!!!!!.\n")
   l2 <- as.character(Sys.time())
   writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")
-  
-  
-  
 }
   
  
