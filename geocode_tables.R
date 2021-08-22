@@ -89,12 +89,16 @@ tab3 <- data.frame(tbls)
 tab3$Status <- ifelse(tab3$Status=="New","New","")
 #tab3$type <- paste(tab3$Contact, tab3$Status)
 
+###todo check only new sites and not the once we have data from
+
+#load last.csv
+#check identical entries column(1:8)
+#add lat lon
+#
 
 
+#get coordinates only for those where lat lon is empty
 
-
-
-#get coordinates
 address <- geocode(paste0( tab3$Street,", ", tab3$Exposure.Location,", ",tab3$Suburb ,", Canberra, Australia"))
 
 tab3$lat <- address$lat
