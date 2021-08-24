@@ -31,12 +31,17 @@ library(crosstalk)
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
 
-cols <- c( "yellow", "red", "blue")
+cols <- c( "red", "yellow","blue")
 
 addBuses <- TRUE
 
+tab3$Contact <- factor(tab3$Contact,levels=c(  "Close"  , "Casual", "Monitor") )
+cc <- as.numeric( tab3$Contact)
+ncols <- c("black","cyan")
+nn <- as.numeric(factor(tab3$Status))
+nn2 <- ifelse(nn==1,nn, 3)
 
-cc <- as.numeric(factor(tab3$Contact))
+
 
 tab3$Date <- substr(tab3$Date,1,10) #ditch day of the week
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
@@ -74,7 +79,7 @@ for (ib in 1:length(coo))
 }
 
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=nn2, fillColor = cols[cc],color=ncols[nn], opacity =0.8, radius = 5 , fillOpacity = 0.8)
   #                           , clusterOptions =markerClusterOptions(spiderfyDistanceMultiplier=1.5,
   # iconCreateFunction=JS("function (cluster) {    
   # 
@@ -89,7 +94,7 @@ m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5,
   #   }    
   #    return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
   # }"))                                                                                                                           #) 
-m <- m %>%  addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
+m <- m %>%  addLegend("bottomright", labels = levels(tab3$Contact), colors = cols, opacity = 0.8)
 
 ####################################################
 ### add bus lines mentioned
@@ -156,8 +161,9 @@ dtt
 Column {data-width=100}
 ------------------------------------------------------------
 
-### Select
+### Filter
 ```{r}
+
 bscols(
   filter_checkbox(
     id = "contact",
