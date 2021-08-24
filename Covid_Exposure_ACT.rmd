@@ -31,7 +31,7 @@ library(crosstalk)
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
 
-cols <- c( "yellow", "red","cyan", "blue")
+cols <- c( "yellow", "red", "blue")
 
 addBuses <- TRUE
 
@@ -104,41 +104,36 @@ m <- m %>%  addLegend("bottomright", labels = levels(factor(tab3$Contact)), colo
 cat(paste0("# ", params$lup))
 
 ```
-
 <sup>Disclaimer: This map shows the covid exposure locations in the ACT and is an **unofficial website** based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt, refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations), which has now also an [**official map**](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations/map#Map-of-ACT-exposure-locations) included. Supported by Volunteers from the University of Canberra. Contacts: Bernd Gruber [bernd.gruber@canberra.edu.au] & Anthony Davidson [anthony.davidson@canberra.edu.au]</sup>
 
-Column {data-width=450}
------------------------------------------------------------------------
 
+
+Column {data-width=500}
+------------------------------------------------------------
 ### Map of Exposure sites and exposed bus routes
 
 ```{r}
-
-#checks 
 m
-
-
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
-
+Column {data-width=400}
+------------------------------------------------------------
 ### Table of Exposure sites
 
 ```{r}
-bscols(
-  filter_checkbox(
-    id = "contact",
-    label = "",
-    sharedData = df_shared,
-    group = ~Contact,
-    inline=TRUE
-  ),
-  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
+# bscols(
+#   filter_checkbox(
+#     id = "contact",
+#     label = "",
+#     sharedData = df_shared,
+#     group = ~Contact,
+#     inline=TRUE
+#   ))
+#bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
 
 dtt <-DT::datatable(df_shared,
      caption = 'Search for entries, (shift)click to select, this highlights the locations in the map.',selection = "multiple", rownames = FALSE, 
-  extensions = c("Buttons", "Select"), options = list(pageLength = 50, autoHideNavigation=TRUE, 
+  extensions = c("Buttons", "Select", "Responsive"), options = list(autoHideNavigation=FALSE, 
    dom = 'Bfrtip',
             select = TRUE, 
             buttons = list(
@@ -158,46 +153,19 @@ dtt
 
 ```
 
+Column {data-width=100}
+------------------------------------------------------------
 
-
+### Select
 ```{r}
+bscols(
+  filter_checkbox(
+    id = "contact",
+    label = "",
+    sharedData = df_shared,
+    group = ~Contact,
+    columns = 1
+  ))
 
-### Chart C
-# names(tab3)
-# glimpse(tab3)
-
-# countSub <- as.data.frame(table(as.factor(tab3$Suburb)))
-# names(countSub) <- c("Suburb", "Total Count")
-# 
-# 
-# # ggplot(countSub) + 
-# #   geom_point(aes(x = Var1, y = Freq, col = Status))
-# 
-# 
-# locs <- select(tab3, lat, lon, Suburb)
-# 
-# plotdat1 <- left_join(countSub, tab3, by = "Suburb")
-# 
-# # length(unique(as.factor(tab3$Suburb)))
-# tab4 <- tab3 %>%
-#   group_by(Suburb) %>%
-#     summarise(count = length(as.factor(Suburb)),
-#               lat = mean(lat),
-#               lon = mean(lon)) 
-# 
-# tab5 <- tab4 %>%
-# group_by(count)%>%
-#       arrange(desc = TRUE, .by_group = TRUE)
-#               
-#               # ,
-# 
-# # glimpse(tab4)
-# # glimpse(plotdat1)
-# #filter on location
-# 
-# ggplot(tab5) + 
-#   geom_point(aes(x = Suburb, y = count), size = 3) + 
-#   theme(axis.text.x = element_text(angle = 90))
+bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
 ```
-
-

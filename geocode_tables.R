@@ -171,7 +171,7 @@ for ( i in 1:length(index))
   }
 }
 
-cols <- c( "yellow", "red","cyan", "blue")
+cols <- c( "yellow", "red","blue")
 
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
 cc <- as.numeric(factor(tab3$Contact))
