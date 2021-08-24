@@ -38,6 +38,7 @@ addBuses <- TRUE
 
 cc <- as.numeric(factor(tab3$Contact))
 
+tab3$Date <- substr(tab3$Date,1,10) #ditch day of the week
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
 
 ###############################################
@@ -132,9 +133,8 @@ bscols(
     sharedData = df_shared,
     group = ~Contact,
     inline=TRUE
-  )
-)
-bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
+  ),
+  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
 
 dtt <-DT::datatable(df_shared,
      caption = 'Search for entries, (shift)click to select, this highlights the locations in the map.',selection = "multiple", rownames = FALSE, 
