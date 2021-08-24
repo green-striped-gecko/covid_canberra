@@ -133,7 +133,7 @@ Column {data-width=400}
 
 dtt <-DT::datatable(df_shared,
      caption = 'Search for entries, (shift)click to select, this highlights the locations in the map.',selection = "multiple", rownames = FALSE, 
-  extensions = c("Buttons", "Select", "Responsive"), options = list(autoHideNavigation=FALSE, 
+  extensions = c("Buttons", "Select", "Responsive"), options = list(autoHideNavigation=FALSE, pageLength=50,
    dom = 'Bfrtip',
             select = TRUE, 
             buttons = list(
