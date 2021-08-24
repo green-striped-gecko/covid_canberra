@@ -11,6 +11,13 @@ params:
     lup: "unknown"
 ---
 
+<style>
+.crosstalk-input-checkboxgroup{
+  color: blue;
+  font-size: 12px;
+}
+</style>
+
 ```{r setup, include=TRUE}
 library(tidyverse)
 library(ggmap)
@@ -19,6 +26,7 @@ library(plotly)
 library(flexdashboard)
 library(DT)
 library(rgdal)
+library(crosstalk)
 #latest dataset
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
@@ -34,10 +42,10 @@ labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab
 
 ###############################################
 ##plot the map
+df_shared <- crosstalk::SharedData$new(tab3[,c(1,8,2:7)])
 
 
-
-m <- leaflet() %>% addTiles()
+m <- leaflet(df_shared) %>% addTiles()
 
 
 if (addBuses) {
@@ -116,8 +124,29 @@ Column {data-width=350}
 ### Table of Exposure sites
 
 ```{r}
-dtt <-DT::datatable(tab3[,c(1,8,2:7)],
-  rownames = FALSE, options = list(pageLength = 50, ausoHideNavigation=TRUE, 
+bscols(
+  filter_checkbox(
+    id = "contact",
+    label = "",
+    sharedData = df_shared,
+    group = ~Contact,
+    inline=TRUE
+  )
+)
+bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
+
+dtt <-DT::datatable(df_shared,
+     caption = 'Search for entries, (shift)click to select, this highlights the locations in the map.',selection = "multiple", rownames = FALSE, 
+  extensions = c("Buttons", "Select"), options = list(pageLength = 50, autoHideNavigation=TRUE, 
+   dom = 'Bfrtip',
+            select = TRUE, 
+            buttons = list(
+              "copy",
+              list(
+                extend = "selectNone",
+                text = "Clear"
+              )
+            ),                                   
   initComplete = JS(
         "function(settings, json) {",
         "$(this.api().table().header()).css({'font-size': '50%'});",

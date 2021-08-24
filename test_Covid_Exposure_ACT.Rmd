@@ -11,6 +11,14 @@ params:
     lup: "unknown"
 ---
 
+<style>
+.crosstalk-input-checkboxgroup{
+  color: blue;
+  font-size: 12px;
+}
+</style>
+
+
 ```{r setup, include=TRUE}
 library(tidyverse)
 library(ggmap)
@@ -19,6 +27,7 @@ library(plotly)
 library(flexdashboard)
 library(DT)
 library(rgdal)
+library(crosstalk)
 #latest dataset
 tab3 <- read.csv("data/last.csv")
 # Aggregate method
@@ -35,9 +44,11 @@ labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab
 ###############################################
 ##plot the map
 
+#tab3$dd<-as.numeric(as.Date(tab3$Date, format = "%d/%m/%Y"))
+df_shared <- crosstalk::SharedData$new(tab3[,c(1,8,2:7)])
 
 
-m <- leaflet() %>% addTiles()
+m <- leaflet(df_shared) %>% addTiles()
 
 
 if (addBuses) {
@@ -65,8 +76,23 @@ for (ib in 1:length(coo))
 }
 
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) 
-m <- m %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)#,
+  #                           clusterOptions =markerClusterOptions(spiderfyDistanceMultiplier=1.5,
+  # iconCreateFunction=JS("function (cluster) {
+  # 
+  #   var childCount = cluster.getChildCount();
+  # 
+  #   if (childCount < 100) {
+  #     c = 'rgba(64, 64, 64, 0.5);'
+  #   } else if (childCount < 1000) {
+  #     c = 'rgba(64, 64, 64, 0.5);'
+  #   } else {
+  #     c = 'rgba(64, 64, 64, 0.5);'
+  #   }
+  #    return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
+  # }")) )
+  
+m <- m  %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
 
 ####################################################
 ### add bus lines mentioned
@@ -103,8 +129,32 @@ Column {data-width=350}
 ### Table of Exposure sites
 
 ```{r}
-dtt <-DT::datatable(tab3[,c(1,8,2:7)],
-  rownames = FALSE, options = list(pageLength = 50, ausoHideNavigation=TRUE, 
+bscols(
+  filter_checkbox(
+    id = "contact",
+    label = "",
+    sharedData = df_shared,
+    group = ~Contact,
+    inline=TRUE
+  )
+)
+bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
+
+#bscols(  filter_slider(id="lat", label="lat",sharedData = df_shared, column=~as.numeric(substr(tab3$Arrival.Time,1,2 ))))
+
+
+dtt <-DT::datatable(df_shared,
+  caption = 'Search for entries, (shift)click to select, this highlights the locations in the map.',selection = "multiple", rownames = FALSE, 
+  extensions = c("Buttons", "Select"),options = list(pageLength = 50, ausoHideNavigation=TRUE, 
+  dom = 'Bfrtip',
+            select = TRUE, 
+            buttons = list(
+              "copy",
+              list(
+                extend = "selectNone",
+                text = "Clear"
+              )
+            ),                                                                                                                                                                    
   initComplete = JS(
         "function(settings, json) {",
         "$(this.api().table().header()).css({'font-size': '50%'});",
@@ -114,47 +164,4 @@ dtt <-DT::datatable(tab3[,c(1,8,2:7)],
 dtt
 
 ```
-
-
-
-```{r}
-
-### Chart C
-# names(tab3)
-# glimpse(tab3)
-
-# countSub <- as.data.frame(table(as.factor(tab3$Suburb)))
-# names(countSub) <- c("Suburb", "Total Count")
-# 
-# 
-# # ggplot(countSub) + 
-# #   geom_point(aes(x = Var1, y = Freq, col = Status))
-# 
-# 
-# locs <- select(tab3, lat, lon, Suburb)
-# 
-# plotdat1 <- left_join(countSub, tab3, by = "Suburb")
-# 
-# # length(unique(as.factor(tab3$Suburb)))
-# tab4 <- tab3 %>%
-#   group_by(Suburb) %>%
-#     summarise(count = length(as.factor(Suburb)),
-#               lat = mean(lat),
-#               lon = mean(lon)) 
-# 
-# tab5 <- tab4 %>%
-# group_by(count)%>%
-#       arrange(desc = TRUE, .by_group = TRUE)
-#               
-#               # ,
-# 
-# # glimpse(tab4)
-# # glimpse(plotdat1)
-# #filter on location
-# 
-# ggplot(tab5) + 
-#   geom_point(aes(x = Suburb, y = count), size = 3) + 
-#   theme(axis.text.x = element_text(angle = 90))
-```
-
 
