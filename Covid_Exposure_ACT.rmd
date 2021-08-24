@@ -73,21 +73,22 @@ for (ib in 1:length(coo))
 }
 
 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8, clusterOptions =markerClusterOptions(spiderfyDistanceMultiplier=1.5,
-  iconCreateFunction=JS("function (cluster) {    
- 
-    var childCount = cluster.getChildCount();  
- 
-    if (childCount < 100) {  
-      c = 'rgba(64, 64, 64, 0.5);'
-    } else if (childCount < 1000) {  
-      c = 'rgba(64, 64, 64, 0.5);'  
-    } else { 
-      c = 'rgba(64, 64, 64, 0.5);'  
-    }    
-     return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
-  }"))                                                                                                                           ) 
-m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8) %>% addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
+m <- m %>% addCircleMarkers(lat=tab3$lat, lng=tab3$lon,popup = labs, weight=0.5, color = cols[cc], radius = 5 , fillOpacity = 0.8)
+  #                           , clusterOptions =markerClusterOptions(spiderfyDistanceMultiplier=1.5,
+  # iconCreateFunction=JS("function (cluster) {    
+  # 
+  #   var childCount = cluster.getChildCount();  
+  # 
+  #   if (childCount < 100) {  
+  #     c = 'rgba(64, 64, 64, 0.5);'
+  #   } else if (childCount < 1000) {  
+  #     c = 'rgba(64, 64, 64, 0.5);'  
+  #   } else { 
+  #     c = 'rgba(64, 64, 64, 0.5);'  
+  #   }    
+  #    return new L.DivIcon({ html: '<div style=\"background-color:'+c+'\"><span>' + childCount + '</span></div>', className: 'marker-cluster', iconSize: new L.Point(40, 40) });
+  # }"))                                                                                                                           #) 
+m <- m %>%  addLegend("bottomright", labels = levels(factor(tab3$Contact)), colors = cols, opacity = 1)
 
 ####################################################
 ### add bus lines mentioned
