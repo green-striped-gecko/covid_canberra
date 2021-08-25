@@ -321,13 +321,13 @@ if(length(wu)>0) {
   attach <- c(attach, dlat, dlon)
   writeLines(attach,"c:/Bernd/R/covid_canberra/comparison/attach.txt")
 #mapshot by script does not work  
-  #mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
+mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
   tolist <-  c("bernd.gruber@canberra.edu.au")
   #tolist <- c("bernd.gruber@canberra.edu.au", "Luis.MijangosAraujo@canberra.edu.au", "Anthony.Davidson@canberra.edu.au")
   
   SendOutlookMail(to = paste(tolist,sep="", collapse="; "), 
                   subject = paste0("Bernd new Covid Exposure sites have been added.Update needed\n ", lup), 
-                  body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt"))
+                  body = body, attachment = c("c:/bernd/r/covid_canberra/comparison/attach.txt", "c:/bernd/r/covid_canberra/comparison/newsites_email.png"))
   
   l1 <- paste("Updated tab3 and last.csv. Current data is from:", lu,"\nSend an email. Check the coordinates!!!!!!.\n")
   l2 <- as.character(Sys.time())
