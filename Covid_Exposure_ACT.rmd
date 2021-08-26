@@ -183,4 +183,6 @@ bscols(
   ))
 
 bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~Date))
+bscols(  filter_select(id="suburb", label="Suburb",sharedData = df_shared, group=~Suburb))
+
 ```
