@@ -167,9 +167,18 @@ Column {data-width=100}
 bscols(
   filter_checkbox(
     id = "contact",
-    label = "",
+    label = "Contact",
     sharedData = df_shared,
     group = ~Contact,
+    columns = 1
+  ))
+
+bscols(
+  filter_checkbox(
+    id = "status",
+    label = "Status",
+    sharedData = df_shared,
+    group = ~Status,
     columns = 1
   ))
 
