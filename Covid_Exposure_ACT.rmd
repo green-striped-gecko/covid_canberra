@@ -108,6 +108,7 @@ m <- m %>%  addLegend("bottomright", labels = levels(tab3$Contact), colors = col
 
 cat(paste0("# ", params$lup))
 
+
 ```
 <sup>Disclaimer: This map shows the covid exposure locations in the ACT and is an **unofficial website** based on [official sources](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations). So if in doubt, refer to the [offical website](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations), which has now also an [**official map**](https://www.covid19.act.gov.au/act-status-and-response/act-covid-19-exposure-locations/map#Map-of-ACT-exposure-locations) included. Supported by Volunteers from the University of Canberra. Contacts: Bernd Gruber [bernd.gruber@canberra.edu.au] & Anthony Davidson [anthony.davidson@canberra.edu.au]</sup>
 
@@ -186,3 +187,45 @@ bscols(  filter_select(id="dates", label="Date",sharedData = df_shared, group=~D
 bscols(  filter_select(id="suburb", label="Suburb",sharedData = df_shared, group=~Suburb))
 
 ```
+
+
+# Exposure sites per Update
+
+``` {r}
+
+
+allfiles <- list.files("./data/", pattern="table_")
+fo <- allfiles[order(file.mtime(file.path("data",allfiles)), decreasing = FALSE)]
+res <- data.frame(update=NA, date=NA,locations=NA, contact=NA,nsites=NA )
+cc<-1
+for (i in 1:length(fo))
+{
+  dd <- read.csv(file.path("data",fo[i]))
+  tt <- table(dd$Contact)
+  if (length(tt)>0) {
+  for (ii in 1:length(tt))
+    {
+    res[cc, 1] <- i
+    res[cc,2] <- (substr(dd$Date[i], 1,10))
+    res[cc,3] <- nrow(dd)
+    res[cc,4] <- names(tt)[ii]
+    res[cc,5] <- tt[ii]
+    cc <- cc+1
+    }
+  }
+}
+
+
+res <- res[!res$contact=="Investigation information",]
+res <- res[!res$contact=="Investigation location",]
+res$contact <- factor(res$contact, levels=c("Close", "Casual","Monitor"))
+
+
+res <- res[order(res$contact),]
+cols <- c( "red", "yellow","blue")[as.numeric(res$contact)]
+
+ggplot(res, aes(x=update,y=nsites))+geom_bar(stat="identity", position = "stack", width=1, aes(fill=contact))+xlab("update #")+ylab("# exposure sites")+ggtitle("Exposure sites over updates")
+
+
+```
+
