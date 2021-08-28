@@ -8,25 +8,25 @@
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
 |Number of observations in common                            |   175|
-|Number of observations in x but not y                       |     0|
-|Number of observations in y but not x                       |    73|
+|Number of observations in x but not y                       |    40|
+|Number of observations in y but not x                       |     0|
 |Number of observations with some compared variables unequal |   175|
 |Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |  1518|
+|Number of values unequal                                    |  1594|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  12|   0|
+|Status            |Status            |  52|   0|
 |Exposure.Location |Exposure.Location | 175|   0|
-|Street            |Street            | 173|   0|
-|Suburb            |Suburb            | 168|   0|
-|Date              |Date              | 160|   0|
-|Arrival.Time      |Arrival.Time      | 172|   0|
-|Departure.Time    |Departure.Time    | 173|   0|
-|Contact           |Contact           | 106|   0|
-|lat               |lat               | 174|   0|
+|Street            |Street            | 171|   0|
+|Suburb            |Suburb            | 162|   0|
+|Date              |Date              | 170|   0|
+|Arrival.Time      |Arrival.Time      | 173|   0|
+|Departure.Time    |Departure.Time    | 174|   0|
+|Contact           |Contact           | 110|   0|
+|lat               |lat               | 172|   0|
 |lon               |lon               | 175|   0|
-|doubles           |doubles           |  15|   0|
-|moved             |moved             |  15|   0|
-range of lats:-35.4197317 to -35.1613889
+|doubles           |doubles           |  30|   0|
+|moved             |moved             |  30|   0|
+range of lats:-35.421141 to -35.1613889
 range of lons:149.0116446 to 149.1905839
