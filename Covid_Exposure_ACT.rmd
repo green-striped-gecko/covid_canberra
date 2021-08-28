@@ -69,13 +69,14 @@ blabs <- paste(paste0("Bus route: ", busses$short_name[blineindex]),"<strong> Fo
 bb <- (busses[blineindex,])
 coo <- coordinates(bb)
 bcols <- colorRampPalette(c("purple", "green"))( length(coo))
-
+if (length(coo)>0)
+{
 for (ib in 1:length(coo))
 {
   cood <- data.frame(coo[[ib]])
   m <- m %>% addPolylines(lng=cood[,1], lat=cood[,2], color = bcols[ib], weight   = 3, opacity = 0.4, popup  = blabs[ib])
 }
-
+}
 }
 
 
