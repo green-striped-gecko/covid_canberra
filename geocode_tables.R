@@ -163,7 +163,7 @@ tab3$doubles[index]<- "<strong/>!Location has more than<br> one entry. Zoom in a
 
 index <- which(tab3$doubles!="")
 tab3$moved <-FALSE
-
+if(length(index)>0) {
 for ( i in 1:length(index))
 {
   
@@ -177,7 +177,7 @@ for ( i in 1:length(index))
     tab3$moved[dbs]<- TRUE
   }
 }
-
+}
 cols <- c( "red", "yellow","blue")
 
 labs <- paste(tab3$Contact, tab3$Status,tab3$Exposure.Location, tab3$Street, tab3$Suburb, tab3$Date,tab3$Arrival.Time, tab3$Departure.Time, tab3$doubles, sep="<br/>") 
