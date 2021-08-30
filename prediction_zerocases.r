@@ -38,7 +38,7 @@ library(dplyr)
 
 res2 <- ddply(res[,c("update","locations")],.(update), summarise, loc=max(locations))
        
-res3 <- res2[22:31,]
+res3 <- res2[22:nrow(res2),]
   
   m <- lm(loc~update, data=res3)
   plot(res3, ylim=c(0,400), xlim=c(25,50))
