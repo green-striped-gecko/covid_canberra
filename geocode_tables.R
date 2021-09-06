@@ -342,5 +342,5 @@ mapshot(nm, file = "c:/Bernd/R/covid_canberra/comparison/newsites.png")
   writeLines(c(l1,l2),"c:/bernd/r/covid_canberra/lastrun.txt")
 }
   
- 
+lup 
 
