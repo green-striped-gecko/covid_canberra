@@ -88,7 +88,7 @@ tbls <- signals %>%
   html_nodes("table") %>%
   html_table(fill = TRUE)
 
-tab3 <- data.frame(tbls)
+tab3 <- data.frame(tbls[[1]])
 
 
 
