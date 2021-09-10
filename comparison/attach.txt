@@ -5,28 +5,28 @@
 |Number of variables compared                                |    12|
 |Number of variables in x but not y                          |     0|
 |Number of variables in y but not x                          |     0|
-|Number of variables compared with some values unequal       |    12|
-|Number of variables compared with all values equal          |     0|
+|Number of variables compared with some values unequal       |     6|
+|Number of variables compared with all values equal          |     6|
 |Number of observations in common                            |   340|
 |Number of observations in x but not y                       |     0|
-|Number of observations in y but not x                       |    23|
-|Number of observations with some compared variables unequal |   340|
-|Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |  2855|
+|Number of observations in y but not x                       |     0|
+|Number of observations with some compared variables unequal |    45|
+|Number of observations with all compared variables equal    |   295|
+|Number of values unequal                                    |    83|
 
-|var.x             |var.y             |   n| NAs|
-|:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  79|   0|
-|Exposure.Location |Exposure.Location | 338|   0|
-|Street            |Street            | 338|   0|
-|Suburb            |Suburb            | 321|   0|
-|Date              |Date              | 142|   0|
-|Arrival.Time      |Arrival.Time      | 336|   0|
-|Departure.Time    |Departure.Time    | 335|   0|
-|Contact           |Contact           | 171|   0|
-|lat               |lat               | 338|   0|
-|lon               |lon               | 339|   0|
-|doubles           |doubles           |  59|   0|
-|moved             |moved             |  59|   0|
+|var.x             |var.y             |  n| NAs|
+|:-----------------|:-----------------|--:|---:|
+|Status            |Status            |  0|   0|
+|Exposure.Location |Exposure.Location |  2|   0|
+|Street            |Street            |  2|   0|
+|Suburb            |Suburb            |  0|   0|
+|Date              |Date              |  0|   0|
+|Arrival.Time      |Arrival.Time      |  0|   0|
+|Departure.Time    |Departure.Time    |  0|   0|
+|Contact           |Contact           |  0|   0|
+|lat               |lat               |  2|   0|
+|lon               |lon               | 25|   0|
+|doubles           |doubles           | 26|   0|
+|moved             |moved             | 26|   0|
 range of lats:-35.4582538 to -35.1644054
 range of lons:149.0116446 to 149.1907314
