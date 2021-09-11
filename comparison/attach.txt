@@ -7,26 +7,26 @@
 |Number of variables in y but not x                          |     0|
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
-|Number of observations in common                            |   340|
-|Number of observations in x but not y                       |    10|
-|Number of observations in y but not x                       |     0|
-|Number of observations with some compared variables unequal |   338|
-|Number of observations with all compared variables equal    |     2|
-|Number of values unequal                                    |  2714|
+|Number of observations in common                            |   330|
+|Number of observations in x but not y                       |     0|
+|Number of observations in y but not x                       |    20|
+|Number of observations with some compared variables unequal |   330|
+|Number of observations with all compared variables equal    |     0|
+|Number of values unequal                                    |  2736|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  58|   0|
-|Exposure.Location |Exposure.Location | 337|   0|
-|Street            |Street            | 334|   0|
-|Suburb            |Suburb            | 314|   0|
-|Date              |Date              |  71|   0|
-|Arrival.Time      |Arrival.Time      | 334|   0|
-|Departure.Time    |Departure.Time    | 333|   0|
-|Contact           |Contact           | 170|   0|
-|lat               |lat               | 333|   0|
-|lon               |lon               | 338|   0|
-|doubles           |doubles           |  46|   0|
-|moved             |moved             |  46|   0|
-range of lats:-35.4582538 to -35.1644054
+|Status            |Status            |  37|   0|
+|Exposure.Location |Exposure.Location | 329|   0|
+|Street            |Street            | 329|   0|
+|Suburb            |Suburb            | 321|   0|
+|Date              |Date              | 153|   0|
+|Arrival.Time      |Arrival.Time      | 328|   0|
+|Departure.Time    |Departure.Time    | 322|   0|
+|Contact           |Contact           | 173|   0|
+|lat               |lat               | 328|   0|
+|lon               |lon               | 330|   0|
+|doubles           |doubles           |  43|   0|
+|moved             |moved             |  43|   0|
+range of lats:-35.4725 to -35.1644054
 range of lons:149.0116446 to 149.1907314
