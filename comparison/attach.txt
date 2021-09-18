@@ -7,26 +7,26 @@
 |Number of variables in y but not x                          |     0|
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
-|Number of observations in common                            |   315|
+|Number of observations in common                            |   311|
 |Number of observations in x but not y                       |     0|
 |Number of observations in y but not x                       |     4|
-|Number of observations with some compared variables unequal |   315|
+|Number of observations with some compared variables unequal |   311|
 |Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |  2830|
+|Number of values unequal                                    |  2750|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  52|   0|
-|Exposure.Location |Exposure.Location | 311|   0|
-|Street            |Street            | 310|   0|
-|Suburb            |Suburb            | 297|   0|
-|Date              |Date              | 314|   0|
-|Arrival.Time      |Arrival.Time      | 314|   0|
-|Departure.Time    |Departure.Time    | 310|   0|
-|Contact           |Contact           | 143|   0|
-|lat               |lat               | 309|   5|
-|lon               |lon               | 314|   5|
-|doubles           |doubles           |  78|   0|
-|moved             |moved             |  78|   0|
+|Status            |Status            |  84|   0|
+|Exposure.Location |Exposure.Location | 301|   0|
+|Street            |Street            | 300|   0|
+|Suburb            |Suburb            | 287|   0|
+|Date              |Date              | 225|   0|
+|Arrival.Time      |Arrival.Time      | 301|   0|
+|Departure.Time    |Departure.Time    | 301|   0|
+|Contact           |Contact           | 165|   0|
+|lat               |lat               | 299|   7|
+|lon               |lon               | 307|   7|
+|doubles           |doubles           |  90|   0|
+|moved             |moved             |  90|   0|
 range of lats:NA to NA
 range of lons:NA to NA
