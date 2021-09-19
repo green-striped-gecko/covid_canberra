@@ -8,25 +8,25 @@
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
 |Number of observations in common                            |   305|
-|Number of observations in x but not y                       |     0|
-|Number of observations in y but not x                       |     6|
+|Number of observations in x but not y                       |    52|
+|Number of observations in y but not x                       |     0|
 |Number of observations with some compared variables unequal |   305|
 |Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |  2619|
+|Number of values unequal                                    |  2739|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  72|   0|
-|Exposure.Location |Exposure.Location | 301|   0|
-|Street            |Street            | 299|   0|
-|Suburb            |Suburb            | 283|   0|
-|Date              |Date              | 158|   0|
-|Arrival.Time      |Arrival.Time      | 300|   0|
-|Departure.Time    |Departure.Time    | 300|   0|
-|Contact           |Contact           | 151|   0|
-|lat               |lat               | 300|  10|
-|lon               |lon               | 303|  10|
-|doubles           |doubles           |  76|   0|
-|moved             |moved             |  76|   0|
+|Status            |Status            |  95|   0|
+|Exposure.Location |Exposure.Location | 302|   0|
+|Street            |Street            | 301|   0|
+|Suburb            |Suburb            | 278|   0|
+|Date              |Date              | 241|   0|
+|Arrival.Time      |Arrival.Time      | 303|   0|
+|Departure.Time    |Departure.Time    | 301|   0|
+|Contact           |Contact           | 146|   0|
+|lat               |lat               | 301|  10|
+|lon               |lon               | 305|  10|
+|doubles           |doubles           |  83|   0|
+|moved             |moved             |  83|   0|
 range of lats:NA to NA
 range of lons:NA to NA
