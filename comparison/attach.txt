@@ -7,26 +7,26 @@
 |Number of variables in y but not x                          |     0|
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
-|Number of observations in common                            |   357|
-|Number of observations in x but not y                       |    10|
+|Number of observations in common                            |   367|
+|Number of observations in x but not y                       |     1|
 |Number of observations in y but not x                       |     0|
-|Number of observations with some compared variables unequal |   357|
-|Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |  3096|
+|Number of observations with some compared variables unequal |   365|
+|Number of observations with all compared variables equal    |     2|
+|Number of values unequal                                    |  3043|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  78|   0|
-|Exposure.Location |Exposure.Location | 348|   0|
-|Street            |Street            | 347|   0|
-|Suburb            |Suburb            | 329|   0|
-|Date              |Date              | 226|   0|
-|Arrival.Time      |Arrival.Time      | 351|   0|
-|Departure.Time    |Departure.Time    | 350|   0|
-|Contact           |Contact           | 156|   0|
-|lat               |lat               | 348|  11|
-|lon               |lon               | 355|  11|
-|doubles           |doubles           | 104|   0|
-|moved             |moved             | 104|   0|
+|Status            |Status            |  59|   0|
+|Exposure.Location |Exposure.Location | 365|   0|
+|Street            |Street            | 363|   0|
+|Suburb            |Suburb            | 347|   0|
+|Date              |Date              | 113|   0|
+|Arrival.Time      |Arrival.Time      | 362|   0|
+|Departure.Time    |Departure.Time    | 361|   0|
+|Contact           |Contact           | 183|   0|
+|lat               |lat               | 364|  10|
+|lon               |lon               | 364|  10|
+|doubles           |doubles           |  81|   0|
+|moved             |moved             |  81|   0|
 range of lats:NA to NA
 range of lons:NA to NA
