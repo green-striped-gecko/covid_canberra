@@ -7,26 +7,26 @@
 |Number of variables in y but not x                          |     0|
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
-|Number of observations in common                            |   579|
-|Number of observations in x but not y                       |   103|
+|Number of observations in common                            |   682|
+|Number of observations in x but not y                       |   265|
 |Number of observations in y but not x                       |     0|
-|Number of observations with some compared variables unequal |   577|
+|Number of observations with some compared variables unequal |   680|
 |Number of observations with all compared variables equal    |     2|
-|Number of values unequal                                    |  4315|
+|Number of values unequal                                    |  4398|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  44|   0|
-|Exposure.Location |Exposure.Location | 454|   0|
-|Street            |Street            | 452|   0|
-|Suburb            |Suburb            | 425|   0|
-|Date              |Date              | 386|   0|
-|Arrival.Time      |Arrival.Time      | 453|   0|
-|Departure.Time    |Departure.Time    | 448|   0|
-|Contact           |Contact           | 241|   0|
-|lat               |lat               | 453|  14|
-|lon               |lon               | 575|  14|
-|doubles           |doubles           | 192|   0|
-|moved             |moved             | 192|   0|
+|Status            |Status            |  37|   0|
+|Exposure.Location |Exposure.Location | 433|   0|
+|Street            |Street            | 431|   0|
+|Suburb            |Suburb            | 410|   0|
+|Date              |Date              | 340|   0|
+|Arrival.Time      |Arrival.Time      | 432|   0|
+|Departure.Time    |Departure.Time    | 426|   0|
+|Contact           |Contact           | 231|   0|
+|lat               |lat               | 431|   8|
+|lon               |lon               | 679|   8|
+|doubles           |doubles           | 274|   0|
+|moved             |moved             | 274|   0|
 range of lats:NA to NA
 range of lons:NA to NA
