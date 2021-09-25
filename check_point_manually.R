@@ -3,9 +3,11 @@
 
 #206
 tab3[which(tab3$lon<145),1:6]
+tab3[which(is.na(tab3$lon)),1:6]
+
 
 column="Street"
-ss <-"Franklin Street & Flinders Way" 
+ss <-"35 Science Road" 
 ii <- grep(ss, tab3[, which(column==colnames(tab3))])
 ii
 
@@ -15,7 +17,7 @@ tm <- tm %>% addCircleMarkers(lat=tab3$lat[ii], lng=tab3$lon[ii],popup = labs[ii
 tm
 
 
-dd <- geocode("Coles Manuka, Franklin Street, Canberra, Australia")
+dd <- geocode("35 Science Road, Acton, Canberra")
 as.data.frame(dd)
 
 
