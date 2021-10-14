@@ -8,25 +8,25 @@
 |Number of variables compared with some values unequal       |    12|
 |Number of variables compared with all values equal          |     0|
 |Number of observations in common                            |   352|
-|Number of observations in x but not y                       |     0|
-|Number of observations in y but not x                       |    14|
+|Number of observations in x but not y                       |    13|
+|Number of observations in y but not x                       |     0|
 |Number of observations with some compared variables unequal |   352|
 |Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |  3134|
+|Number of values unequal                                    |  3087|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
-|Status            |Status            |  47|   0|
-|Exposure.Location |Exposure.Location | 351|   0|
-|Street            |Street            | 349|   0|
-|Suburb            |Suburb            | 341|   0|
-|Date              |Date              | 331|   0|
-|Arrival.Time      |Arrival.Time      | 351|   0|
-|Departure.Time    |Departure.Time    | 348|   0|
-|Contact           |Contact           | 163|   0|
-|lat               |lat               | 350|   0|
+|Status            |Status            |  46|   0|
+|Exposure.Location |Exposure.Location | 349|   0|
+|Street            |Street            | 348|   0|
+|Suburb            |Suburb            | 331|   0|
+|Date              |Date              | 312|   0|
+|Arrival.Time      |Arrival.Time      | 348|   0|
+|Departure.Time    |Departure.Time    | 345|   0|
+|Contact           |Contact           | 162|   0|
+|lat               |lat               | 347|   0|
 |lon               |lon               | 351|   0|
-|doubles           |doubles           |  76|   0|
-|moved             |moved             |  76|   0|
+|doubles           |doubles           |  74|   0|
+|moved             |moved             |  74|   0|
 range of lats:-35.4725 to -35.1512835
-range of lons:149.0116696 to 149.1906089
+range of lons:149.0116696 to 149.2042769
