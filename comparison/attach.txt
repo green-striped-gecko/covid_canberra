@@ -8,24 +8,24 @@
 |Number of variables compared with some values unequal       |    11|
 |Number of variables compared with all values equal          |     0|
 |Number of observations in common                            |   104|
-|Number of observations in x but not y                       |     0|
-|Number of observations in y but not x                       |    12|
+|Number of observations in x but not y                       |     4|
+|Number of observations in y but not x                       |     0|
 |Number of observations with some compared variables unequal |   104|
 |Number of observations with all compared variables equal    |     0|
-|Number of values unequal                                    |   755|
+|Number of values unequal                                    |   803|
 
 |var.x             |var.y             |   n| NAs|
 |:-----------------|:-----------------|---:|---:|
 |Status            |Status            |   4|   0|
-|Exposure.Location |Exposure.Location | 104|   0|
-|Street            |Street            | 104|   0|
-|Suburb            |Suburb            |  99|   0|
-|Date              |Date              |  24|   0|
-|Arrival.Time      |Arrival.Time      | 102|   0|
-|Departure.Time    |Departure.Time    | 101|   0|
-|Contact           |Contact           |   8|   0|
-|lat               |lat               | 103|   0|
-|lon               |lon               | 104|   0|
-|moved             |moved             |   2|   0|
+|Exposure.Location |Exposure.Location | 103|   0|
+|Street            |Street            | 103|   0|
+|Suburb            |Suburb            | 100|   0|
+|Date              |Date              |  69|   0|
+|Arrival.Time      |Arrival.Time      |  99|   0|
+|Departure.Time    |Departure.Time    |  98|   0|
+|Contact           |Contact           |  13|   0|
+|lat               |lat               | 102|   0|
+|lon               |lon               | 103|   0|
+|moved             |moved             |   9|   0|
 range of lats:-35.4565418 to -35.1512835
 range of lons:149.0178943 to 149.2042769
